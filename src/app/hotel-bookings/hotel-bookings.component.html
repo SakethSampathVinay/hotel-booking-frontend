@@ -1,0 +1,44 @@
+<div class="bookings-container">
+  <div class="header-section">
+    <h1 class="title">My Bookings</h1>
+    <p class="subtitle">
+      Easily manage your past, current, and upcoming hotel reservations in one
+      place. Plan your trips seamlessly with just a few clicks
+    </p>
+  </div>
+
+  <div class="table-header">
+    <p class="col hotels-col">Hotels</p>
+    <p class="col date-col">Date & Timings</p>
+    <p class="col payment-col">Payment</p>
+  </div>
+
+  <div class="booking-card" *ngFor="let booking of bookingsData">
+    <div class="hotel-info">
+      <img [src]="booking.image" alt="Hotel room" class="hotel-image" />
+      <div class="hotel-details">
+        <h1 class="hotel-name">{{ booking.name }}</h1>
+        <p class="hotel-address">{{ booking.address }}</p>
+        <p class="hotel-guests">Guests: {{ booking.guest_count }}</p>
+        <!-- <h3 class="hotel-price">Room ID: {{ booking.room_id }}</h3> -->
+      </div>
+    </div>
+
+    <div class="checkin-info">
+      <label class="date-label">Check-In</label>
+      <p class="date-text">{{ booking.check_in | date : "mediumDate" }}</p>
+    </div>
+
+    <div class="checkout-info">
+      <label class="date-label">Check-Out</label>
+      <p class="date-text">{{ booking.check_out | date : "mediumDate" }}</p>
+    </div>
+
+    <div class="payment-status">
+      <p *ngIf="booking.isPaid; else unpaid" class="payment-text">Paid</p>
+      <ng-template #unpaid>
+        <p class="payment-failure">Pending</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

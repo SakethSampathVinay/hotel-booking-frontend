@@ -1,0 +1,44 @@
+.about-section {
+  padding: 4rem 1.5rem;
+  background-color: #ffffff;
+  color: #1a202c;
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  text-align: left;
+}
+
+.about-text {
+  flex: 1 1 400px;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.about-image-container {
+  flex: 1 1 400px;
+  text-align: center;
+}
+
+.about-image {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}

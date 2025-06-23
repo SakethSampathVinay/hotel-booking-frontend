@@ -1,0 +1,19 @@
+<div class="exclusive-container">
+  <h1 class="exclusive-heading">Exclusive Offers</h1>
+  <p class="exculsive-description">
+    Take advantage of our limited-time offers and special packages to enhance
+    your stay and create unforgettable memories.
+  </p>
+  <div class="total-offer-container">
+    <div
+      *ngFor="let offer of exclusiveOffers; trackBy: trackByOfferId"
+      [ngStyle]="{ 'background-image': 'url(' + offer.image + ')' }"
+      class="exclusive-card-container"
+    >
+      <h2 class="offer-title">{{ offer.title }}</h2>
+      <p class="offer-description">{{ offer.description }}</p>
+      <p class="offer-expires-on">Expires on: {{ offer.expiryDate }}</p>
+      <p class="offer-discount">Discount: {{ offer.priceOff }}%</p>
+    </div>
+  </div>
+</div>

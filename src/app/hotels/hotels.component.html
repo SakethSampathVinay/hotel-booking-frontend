@@ -1,0 +1,49 @@
+<div class="hotel-rooms-total-container">
+  <div class="hotel-rooms-container">
+    <h1 class="hotel-heading">Hotel Rooms</h1>
+    <p class="hotel-description">
+      Take advantage of our limited-time offers and special packages to enhance
+      your stay and create unforgettable memories.
+    </p>
+
+    <h1 class="hotel-rooms-not-available" *ngIf="filteredRooms.length === 0">
+      No Rooms are Available
+    </h1>
+
+    <div
+      class="hotel-rooms-card-container"
+      *ngFor="let room of filteredRooms; trackBy: trackByRoom"
+      [routerLink]="['/rooms', room._id]"
+    >
+      <div class="hotel-rooms-content-container">
+        <img
+          class="image"
+          [src]="room.images[0] || 'https://via.placeholder.com/350x250'"
+          alt="Room Image"
+        />
+
+        <div class="hotel-rooms-content-card-container">
+          <p class="hotel-rooms-city" *ngIf="room.roomType">
+            {{ room.roomType }}
+          </p>
+          <h2 class="hotel-rooms-name">
+            {{ room.hotelName || "Unnamed Hotel" }}
+          </h2>
+          <p class="hotel-rooms-address" *ngIf="room.streetAddress">
+            {{ room.streetAddress }}
+          </p>
+          <p class="hotel-rooms-amenities">
+            Amenities: {{ room.amenities.join(", ") }}
+          </p>
+          <p class="hotel-rooms-pricepernight">
+            ₹{{ room.pricePerNight }} / night
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr-line" />
+  </div>
+
+  <app-filters (filteredRoomsChange)="updateRooms($event)"></app-filters>
+</div>

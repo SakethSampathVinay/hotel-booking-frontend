@@ -1,0 +1,75 @@
+<div class="hotel-details-container" *ngIf="hotel">
+  <div class="hotel-details-content-container">
+    <h3 class="hotel-details-name">{{ hotel.hotelName }}</h3>
+    <p class="hotel-details-roomtype">({{ hotel.roomType }})</p>
+    <p class="hotel-details-percentageoff">20%</p>
+  </div>
+
+  <p class="hotel-details-address">{{ hotel.streetAddress }}</p>
+
+  <div class="hotel-details-images">
+    <img class="hotel-image-main" [src]="selectedImage" />
+
+    <div class="hotel-images-grid">
+      <img
+        *ngFor="let image of hotel.images"
+        class="hotel-grid-image"
+        [src]="image"
+        (click)="selectedImage = image"
+        alt="Room Image"
+      />
+    </div>
+  </div>
+
+  <div class="hotel-details-price-container">
+    <h2 class="hotel-detail-experience">Experience Luxury Like Never Before</h2>
+    <h2 class="hote-details-pricepernight">₹{{ hotel.pricePerNight }}/night</h2>
+  </div>
+
+  <div class="hotel-details-amenities-container">
+    <div
+      class="hotel-details-amenities"
+      *ngFor="let amenity of hotel.amenities"
+    >
+      {{ amenity }}
+    </div>
+  </div>
+
+  <div class="hotel-details-availability">
+    <div class="hotel-details-card-availability">
+      <label class="hotel-details-label">Check-In</label>
+      <input class="hotel-details-date" type="date" [(ngModel)]="check_in" />
+    </div>
+    <div class="hotel-details-card-availability">
+      <label class="hotel-details-label">Check-Out</label>
+      <input class="hotel-details-date" type="date" [(ngModel)]="check_out" />
+    </div>
+    <div class="hotel-details-card-availability">
+      <label class="hotel-details-label">Guests</label>
+      <input
+        class="hotel-details-date"
+        type="number"
+        min="1"
+        [(ngModel)]="guest_count"
+      />
+    </div>
+    <button
+      class="hotel-details-availability-button"
+      (click)="bookNow()"
+      [routerLink]="['/bookings']"
+    >
+      Book Now
+    </button>
+  </div>
+
+  <div class="hotel-details-description">
+    <hr />
+    <p>
+      Guests will be allocated on the ground floor according to availability.
+      You get a comfortable Two bedroom apartment has a true city feeling. The
+      price quoted is for two guests. Please mark the number of guests to get
+      the exact price for groups.
+    </p>
+    <hr />
+  </div>
+</div>

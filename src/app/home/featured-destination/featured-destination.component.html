@@ -1,0 +1,29 @@
+<div class="featured-destination-container">
+  <h1 class="featured-heading">Featured Destination</h1>
+  <p class="featured-description">
+    Discover our handpicked selection of exceptional properties around the
+    world, offering unparalleled luxury and unforgettable experiences.
+  </p>
+
+  <div class="featured-total-container">
+    <div
+      class="featured-card-container"
+      *ngFor="let room of rooms.slice(0, 4)"
+      [routerLink]="['/rooms', room._id]"
+    >
+      <img [src]="room.images[0]" alt="Room Image" class="featured-image" />
+      <div class="featured-card-content">
+        <h3 class="featured-heading">{{ room.hotelName }}</h3>
+        <p class="featured-address">{{ room.streetAddress }}</p>
+        <div class="featured-price-container">
+          <h3 class="featured-price">${{ room.pricePerNight }}/night</h3>
+          <button class="featured-book-now-button">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="all-destinations-button" routerLink="/rooms">
+    View All Destinations
+  </button>
+</div>
