@@ -10,6 +10,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { loginSignupGuard } from './guards/login-signup.guard';
+import { RenderMode } from '@angular/ssr';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [loginSignupGuard] },
@@ -25,6 +26,9 @@ export const routes: Routes = [
     path: 'rooms/:id',
     component: HotelDetailsComponent,
     canActivate: [authGuard],
+    data: {
+      renderMode: 'default',
+    },
   },
   {
     path: 'bookings',
