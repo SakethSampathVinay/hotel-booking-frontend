@@ -9,16 +9,34 @@ import { AboutComponent } from './about/about.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
+import { loginSignupGuard } from './guards/login-signup.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'rooms', component: HotelsComponent },
-  { path: 'rooms/:id', component: HotelDetailsComponent },
-  { path: 'bookings', component: HotelBookingsComponent },
-  { path: 'experience', component: ExperiencesComponent },
-  { path: 'about', component: AboutComponent },
-  {path: 'signup', component: SignupComponent},
-  {path: 'login', component: LoginComponent},
-  {path: '', component: HomeComponent, canActivate: [authGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [loginSignupGuard] },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [loginSignupGuard],
+  },
+
+  { path: '', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'rooms', component: HotelsComponent, canActivate: [authGuard] },
+  {
+    path: 'rooms/:id',
+    component: HotelDetailsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'bookings',
+    component: HotelBookingsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'experience',
+    component: ExperiencesComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'about', component: AboutComponent, canActivate: [authGuard] },
+
   { path: '**', component: PageNotFoundComponent },
 ];

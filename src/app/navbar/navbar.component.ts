@@ -17,4 +17,11 @@ export class NavbarComponent {
   closeMenu() {
     this.menuOpen = false;
   }
+
+  logout() {
+    console.log('Logging out...');
+    localStorage.removeItem('token');
+    window.location.href = '/signup';
+  }
+
 }

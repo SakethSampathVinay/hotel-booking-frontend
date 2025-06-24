@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgModel } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +11,26 @@ import { FormsModule, NgModel } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  name: string = '';
   email: string = '';
   password: string = '';
+  message: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   onLogin(): void {
-    this.authService
-      .login({email: this.email, password: this.password })
-      .subscribe({
-        next: (response) => {
-          this.authService.saveToken(response.token);
-          console.log('Login Successful: ', response);
-          alert('Login Successfully');
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-          alert('Login failed. Please check your credentials.');
-        },
-      });
+    this.loginService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        console.log('Login Successfully', response);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+      },
+    });
+  }
+
+  onSignupRedirect(): void {
+    this.router.navigate(['/signup']);
   }
 }
