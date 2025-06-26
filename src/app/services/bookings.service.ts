@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { url } from 'inspector';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,5 +26,17 @@ export class BookingsService {
   getBooking(): Observable<any> {
     const url = `${this.apiUrl}get-bookings`;
     return this.http.get(url, { headers: this.getAuthHeaders() });
+  }
+
+  updateBookingPaid(bookingId: string): Observable<any> {
+    const url = `${this.apiUrl}update-pay`;
+    const body = {
+      booking_id: bookingId,
+      status: 'Paid',
+    };
+    console.log('📦 Sending body:', body);
+    return this.http.put(url, body, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

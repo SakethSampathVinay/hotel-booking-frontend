@@ -4,10 +4,12 @@
   <ul class="navbar-links" [class.active]="menuOpen">
     <li routerLink="/" class="navbar-li" (click)="closeMenu()">Home</li>
     <li routerLink="/rooms" class="navbar-li" (click)="closeMenu()">Hotels</li>
+    <li routerLink="/bookings" class="navbar-li" (click)="closeMenu()">
+      Bookings
+    </li>
     <li routerLink="/experience" class="navbar-li" (click)="closeMenu()">
       Experiences
     </li>
-    <li routerLink="/about" class="navbar-li" (click)="closeMenu()">About</li>
   </ul>
 
   <button class="navbar-button" (click)="logout()">Logout</button>

@@ -37,7 +37,16 @@
     <div class="payment-status">
       <p *ngIf="booking.isPaid; else unpaid" class="payment-text">Paid</p>
       <ng-template #unpaid>
-        <p class="payment-failure">Pending</p>
+        <p class="payment-failure" *ngIf="booking.status !== 'Paid'">Pending</p>
+        <p class="payment-success" *ngIf="booking.status === 'Paid'" style="color: green; font-weight: bold;">Paid</p>
+
+        <button
+          class="pay-now-button"
+          (click)="isPaidfn(booking)"
+          *ngIf="booking.status !== 'Paid'"
+        >
+          Pay now
+        </button>
       </ng-template>
     </div>
   </div>
