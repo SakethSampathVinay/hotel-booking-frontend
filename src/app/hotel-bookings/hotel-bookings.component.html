@@ -20,7 +20,6 @@
         <h1 class="hotel-name">{{ booking.name }}</h1>
         <p class="hotel-address">{{ booking.address }}</p>
         <p class="hotel-guests">Guests: {{ booking.guest_count }}</p>
-        <!-- <h3 class="hotel-price">Room ID: {{ booking.room_id }}</h3> -->
       </div>
     </div>
 
@@ -38,7 +37,7 @@
       <p *ngIf="booking.isPaid; else unpaid" class="payment-text">Paid</p>
       <ng-template #unpaid>
         <p class="payment-failure" *ngIf="booking.status !== 'Paid'">Pending</p>
-        <p class="payment-success" *ngIf="booking.status === 'Paid'" style="color: green; font-weight: bold;">Paid</p>
+        <p class="payment-success" *ngIf="booking.status === 'Paid'">Paid</p>
 
         <button
           class="pay-now-button"

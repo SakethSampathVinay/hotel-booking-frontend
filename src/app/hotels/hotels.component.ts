@@ -17,6 +17,7 @@ export class HotelsComponent implements OnInit {
   constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.roomService.getRooms().subscribe({
       next: (response) => {
         this.filteredRooms = response;

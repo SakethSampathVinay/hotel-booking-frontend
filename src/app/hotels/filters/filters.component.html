@@ -1,58 +1,52 @@
-<div class="filters-container">
-  <div class="filters-heading-container">
-    <h4 class="filters-heading">Filters</h4>
-    <button (click)="clearFilters()" class="filters-clear-button">CLEAR</button>
+<div class="filters-wrapper">
+  <!-- Mobile Toggle Button -->
+  <button class="filters-toggle-btn" (click)="showMobileFilters = true">
+    Filters
+  </button>
+
+  <!-- Backdrop -->
+  <div class="filters-backdrop" *ngIf="showMobileFilters" (click)="showMobileFilters = false"></div>
+
+  <!-- Mobile Sidebar -->
+  <div class="filters-sidebar mobile" *ngIf="showMobileFilters">
+    <div class="filters-header">
+      <h2>Filters</h2>
+      <button class="close-btn" (click)="showMobileFilters = false">&times;</button>
+    </div>
+    <ng-container *ngTemplateOutlet="filtersContent"></ng-container>
   </div>
-  <div class="popular-filters-container">
-    <h1 class="popular-filters-heading">Popular filters</h1>
-    <div
-      class="popular-filters-card-container"
-      *ngFor="let filter of popularFilters"
-    >
-      <label class="popular-filters-card-label">
-        <input
-          type="checkbox"
-          class=""
-          [value]="filter"
-          (change)="toggleFilter(filter)"
-          [checked]="selectedRoomTypes.includes(filter)"
-        />
-        {{ filter }}
-      </label>
-    </div>
-    <div class="popular-filters-container">
-      <h1 class="popular-filters-heading">Price Range</h1>
-      <div
-        class="popular-filters-card-container"
-        *ngFor="let price of priceRange"
-      >
-        <label class="popular-filters-card-label">
-          <input
-            type="checkbox"
-            class=""
-            [value]="price"
-            (change)="togglePrice(price)"
-            [checked]="selectedPriceRanges.includes(price)"
-          />
-          {{ price }}
-        </label>
-      </div>
-    </div>
-    <div class="popular-filters-container">
-      <h1 class="popular-filters-heading">Sort By</h1>
-      <div class="popular-filters-card-container" *ngFor="let sort of sortBy">
-        <label class="popular-filters-card-label">
-          <input
-            type="radio"
-            class=""
-            name="sortBy"
-            [value]="sort"
-            [(ngModel)]="selectedSortBy"
-            (change)="emitFilteredRooms()"
-          />
-          {{ sort }}
-        </label>
-      </div>
-    </div>
+
+  <!-- Desktop Sidebar (Always visible on large screens) -->
+  <div class="filters-sidebar desktop">
+    <ng-container *ngTemplateOutlet="filtersContent"></ng-container>
   </div>
 </div>
+
+<!-- Shared filter content -->
+<ng-template #filtersContent>
+  <div class="filters-section">
+    <h3>Popular Filters</h3>
+    <label *ngFor="let filter of popularFilters">
+      <input type="checkbox" [checked]="selectedRoomTypes.includes(filter)" (change)="toggleFilter(filter)" />
+      {{ filter }}
+    </label>
+  </div>
+
+  <div class="filters-section">
+    <h3>Price Range</h3>
+    <label *ngFor="let price of priceRange">
+      <input type="checkbox" [checked]="selectedPriceRanges.includes(price)" (change)="togglePrice(price)" />
+      {{ price }}
+    </label>
+  </div>
+
+  <div class="filters-section">
+    <h3>Sort By</h3>
+    <label *ngFor="let sort of sortBy">
+      <input type="radio" name="sortBy" [value]="sort" [(ngModel)]="selectedSortBy" (change)="emitFilteredRooms()" />
+      {{ sort }}
+    </label>
+  </div>
+
+  <button (click)="clearFilters()" class="filters-clear-button">CLEAR ALL</button>
+</ng-template>

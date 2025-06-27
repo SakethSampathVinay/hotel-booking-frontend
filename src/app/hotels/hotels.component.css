@@ -1,173 +1,119 @@
 .hotel-rooms-total-container {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-direction: column;
+  gap: 24px;
+  padding: 120px 24px 60px;
+}
+
+@media (min-width: 1024px) {
+  .hotel-rooms-total-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 140px 96px 60px;
+  }
 }
 
 .hotel-rooms-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 80%;
-  margin: 20px;
+  flex: 1;
 }
 
 .hotel-heading {
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 5px;
+  font-size: 36px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  color: #111827;
+  margin-bottom: 8px;
 }
 
 .hotel-description {
-  font-family: "Roboto", sans-serif;
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #555;
+  font-size: 14px;
+  color: #6b7280;
+  max-width: 700px;
+  line-height: 20px;
+}
+
+.hotel-rooms-card-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  gap: 24px;
+  border-bottom: 1px solid #d1d5db;
+  cursor: pointer;
 }
 
 .hotel-rooms-content-container {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  background-color: azure;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 10px 0;
-  transition: box-shadow 0.3s ease;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.hotel-rooms-content-container:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+@media (min-width: 768px) {
+  .hotel-rooms-content-container {
+    flex-direction: row;
+  }
 }
 
 .image {
-  height: 250px;
-  width: 350px;
-  border-radius: 10px;
+  max-height: 260px;
+  width: 100%;
   object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .image {
+    width: 50%;
+  }
 }
 
 .hotel-rooms-content-card-container {
-  padding-left: 25px;
-  color: #111;
-  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 10px;
+  flex: 1;
 }
 
 .hotel-rooms-city {
-  font-weight: 400;
   font-size: 14px;
-  color: #777;
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
+  color: #6b7280;
 }
 
 .hotel-rooms-name {
-  font-weight: 700;
-  font-size: 22px;
-  margin: 5px 0;
+  font-size: 24px;
+  font-family: "Playfair Display", serif;
+  color: #1f2937;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hotel-rooms-address {
   font-size: 14px;
-  color: #444;
-  margin-bottom: 8px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .hotel-rooms-amenities {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-  line-height: 1.3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 20px;
 }
 
 .hotel-rooms-pricepernight {
-  font-weight: 600;
   font-size: 18px;
-  color: #222;
+  color: #374151;
+  font-weight: 500;
 }
 
 .hr-line {
-  border: 1px solid #ccc;
-  margin-top: 20px;
-}
-
-.hotel-rooms-not-available {
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: #888;
-  margin: 30px 0;
-}
-
-.hotel-rooms-card-container {
-  cursor: pointer;
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-@media (max-width: 1024px) {
-  .hotel-rooms-total-container {
-    flex-direction: column; /* stack vertically */
-  }
-
-  .hotel-rooms-container {
-    width: 100%;
-    margin: 15px 10px;
-  }
-
-  .hotel-rooms-content-container {
-    flex-direction: column; /* stack image above text */
-    align-items: center;
-  }
-
-  .image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 15px;
-  }
-
-  .hotel-rooms-content-card-container {
-    padding-left: 0;
-    text-align: center;
-  }
-}
-
-/* Small devices (phones, 480px and below) */
-@media (max-width: 480px) {
-  .hotel-heading {
-    font-size: 24px;
-  }
-
-  .hotel-description {
-    font-size: 14px;
-  }
-
-  .hotel-rooms-content-container {
-    padding: 10px;
-  }
-
-  .hotel-rooms-city,
-  .hotel-rooms-address,
-  .hotel-rooms-amenities,
-  .hotel-rooms-pricepernight {
-    font-size: 13px;
-  }
-
-  .hotel-rooms-name {
-    font-size: 18px;
-  }
-
-  .image {
-    max-width: 100%;
-    height: auto;
-  }
+  height: 1px;
+  background-color: #d1d5db;
+  border: none;
+  margin-top: 32px;
 }

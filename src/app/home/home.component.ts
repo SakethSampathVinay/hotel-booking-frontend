@@ -19,4 +19,8 @@ import { FooterComponent } from '../footer/footer.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}

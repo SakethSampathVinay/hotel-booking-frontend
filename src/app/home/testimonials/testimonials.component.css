@@ -2,78 +2,71 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
-  background-color: #f7f9fb;
-  text-align: center;
+  padding: 80px 24px 120px;
+  background-color: #f8fafc;
 }
 
 .testimonial-container h1 {
-  font-family: "Poppins", sans-serif;
   font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 12px;
 }
 
-.testimonial-container p {
-  font-family: "Open Sans", sans-serif;
+.testimonial-container p:first-of-type {
+  max-width: 720px;
+  text-align: center;
   font-size: 16px;
-  color: #555;
-  max-width: 700px;
-  margin-bottom: 40px;
+  color: #4b5563;
+  line-height: 1.6;
 }
 
 .testimonial-total-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
-  width: 100%;
-  max-width: 1200px;
+  margin-top: 80px;
 }
 
 .testimonial-card-container {
-  background-color: #ffffff;
+  background-color: white;
+  padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  text-align: left;
-  transition: transform 0.3s ease;
-}
-
-.testimonial-card-container:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 320px;
 }
 
 .testimonial-content-container {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .testimonial-image {
-  height: 60px;
-  width: 60px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .testimonial-name {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  margin-left: 15px;
-  color: #333;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
 }
 
 .testimonial-rating {
   font-size: 14px;
-  color: #f39c12;
-  font-weight: 500;
-  margin-bottom: 10px;
+  color: #f59e0b;
+  margin-bottom: 12px;
 }
 
 .testimonial-review {
   font-size: 15px;
-  font-family: "Open Sans", sans-serif;
-  color: #555;
+  color: #6b7280;
   line-height: 1.6;
+  max-width: 360px;
 }

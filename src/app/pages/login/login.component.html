@@ -1,19 +1,26 @@
 <div class="login-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onLogin()">
-    <input [(ngModel)]="email" name="email" placeholder="Email" required />
+  <h2 class="login-title">Login</h2>
+  <form (ngSubmit)="onLogin()" class="login-form">
+    <input
+      [(ngModel)]="email"
+      name="email"
+      class="login-input"
+      placeholder="Email"
+      required
+    />
     <input
       [(ngModel)]="password"
       name="password"
       type="password"
+      class="login-input"
       placeholder="Password"
       required
     />
-    <button type="submit">Login</button>
+    <button type="submit" class="login-button">Login</button>
 
-    <p class="">
+    <p class="signup-link">
       Don't have an account?
-      <a (click)="onSignupRedirect()" style="cursor: pointer">Sign up here</a>
+      <a (click)="onSignupRedirect()" class="signup-anchor">Sign up here</a>
     </p>
   </form>
 </div>

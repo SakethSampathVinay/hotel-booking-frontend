@@ -4,17 +4,25 @@
     Discover why discerning travelers consistently choose EasyStay for their
     exclusive and luxurious accommodations around the world.
   </p>
-<div class="testimonial-total-container">
-  <div
-    class="testimonial-card-container"
-    *ngFor="let testimonial of testimonials; trackBy: trackByTestimonalId"
-  >
-  <div class="testimonial-content-container">
-    <img class="testimonial-image" [src]="testimonial.image" />
-    <h1 class="testimonial-name">{{ testimonial.name }}</h1>
+  <div class="testimonial-total-container">
+    <div
+      class="testimonial-card-container"
+      *ngFor="let testimonial of testimonials; trackBy: trackByTestimonalId"
+    >
+      <div class="testimonial-content-container">
+        <img class="testimonial-image" [src]="testimonial.image" />
+        <div>
+          <h1
+            class="testimonial-name"
+            style="font-size: 20px; padding-top: 10px; margin-bottom: -10px"
+          >
+            {{ testimonial.name }}
+          </h1>
+          <p class="testimonial-rating" style="text-align: left;">Rating: {{ testimonial.rating }}</p>
+        </div>
+      </div>
+
+      <p class="testimonial-review" style="text-align: left;">{{ testimonial.review }}</p>
     </div>
-    <p class="testimonial-rating">Rating: {{ testimonial.rating }}</p>
-    <p class="testimonial-review">{{ testimonial.review }}</p>
   </div>
-</div>
 </div>

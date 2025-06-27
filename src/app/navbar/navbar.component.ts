@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,20 +9,21 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  menuOpen = false;
+  menuOpen: boolean = false;
 
-  toggleMenu() {
+  constructor(private router: Router) {}
+
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  closeMenu() {
+  closeMenu(): void {
     this.menuOpen = false;
   }
 
-  logout() {
+  logout(): void {
     console.log('Logging out...');
+    this.router.navigate(['/signup']);
     localStorage.removeItem('token');
-    window.location.href = '/signup';
   }
-
 }

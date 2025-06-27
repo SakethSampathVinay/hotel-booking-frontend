@@ -2,48 +2,52 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
-  background-color: #f9f9f9;
+  padding: 5rem 1.5rem;
+  background-color: #f8fafc; /* Tailwind bg-slate-50 */
 }
 
 .featured-heading {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 10px;
-  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: -10px;
+}
+
+.featured-heading1 {
+  font-size: 21px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: -10px;
 }
 
 .featured-description {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  color: #555;
-  max-width: 700px;
+  max-width: 720px;
+  font-size: 1rem;
+  color: #4b5563; /* text-gray-600 */
   text-align: center;
-  margin-bottom: 40px;
   line-height: 1.6;
 }
 
 .featured-total-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  width: 100%;
-  max-width: 1200px;
-  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 5rem;
 }
 
 .featured-card-container {
-  background-color: #fff;
-  border-radius: 12px;
+  width: 280px;
+  border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .featured-card-container:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .featured-image {
@@ -53,78 +57,55 @@
 }
 
 .featured-card-content {
-  padding: 16px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .featured-address {
-  font-size: 14px;
-  color: #777;
-  margin: 5px 0 15px 0;
+  font-size: 0.875rem;
+  color: #6b7280; /* Tailwind text-gray-500 */
 }
 
 .featured-price-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
 }
 
 .featured-price {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
 }
 
 .featured-book-now-button {
-  padding: 8px 16px;
-  background-color: #d4af37;
+  padding: 0.4rem 1rem;
+  background-color: #000;
   color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 14px;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .featured-book-now-button:hover {
-  background-color: #d4af37;
+  background-color: #222;
 }
 
 .all-destinations-button {
-  padding: 10px 24px;
-  background-color: transparent;
-  color: #d4af37;
-  border: 2px solid #007bff;
-  border-radius: 25px;
-  font-size: 16px;
+  margin-top: 4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  color: #111827;
+  transition: background-color 0.3s;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 20px;
 }
-
 .all-destinations-button:hover {
-  background-color: #d4af37;
-  color: #fff;
-}
-
-@media (max-width: 480px) {
-  .featured-heading {
-    font-size: 24px;
-  }
-
-  .featured-description {
-    font-size: 14px;
-    padding: 0 10px;
-  }
-
-  .featured-price {
-    font-size: 16px;
-  }
-
-  .featured-book-now-button,
-  .all-destinations-button {
-    font-size: 13px;
-    padding: 6px 14px;
-  }
+  background-color: #f9fafb;
 }

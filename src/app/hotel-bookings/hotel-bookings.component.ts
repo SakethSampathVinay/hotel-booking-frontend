@@ -17,6 +17,7 @@ export class HotelBookingsComponent {
   constructor(private bookingService: BookingsService) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingService.getBooking().subscribe({
       next: (response) => {
         return (this.bookingsData = response.bookings);

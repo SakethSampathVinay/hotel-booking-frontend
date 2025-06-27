@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { roomsDummyData } from '../../../assets/assets';
@@ -6,11 +6,13 @@ import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-filters',
-  imports: [NgFor, FormsModule],
+  imports: [NgFor, FormsModule, CommonModule],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
 })
 export class FiltersComponent {
+  showMobileFilters = false;
+
   @Output() filteredRoomsChange = new EventEmitter<any[]>();
 
   popularFilters = ['Single Bed', 'Double Bed', 'Luxury Room', 'Family Suite'];
@@ -97,5 +99,9 @@ export class FiltersComponent {
       if (price >= min && price <= max) return true;
     }
     return false;
+  }
+
+  toggleMobileFilters() {
+    this.showMobileFilters = !this.showMobileFilters;
   }
 }

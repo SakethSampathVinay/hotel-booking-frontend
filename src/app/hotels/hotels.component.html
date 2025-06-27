@@ -1,4 +1,5 @@
 <div class="hotel-rooms-total-container">
+  <app-filters (filteredRoomsChange)="updateRooms($event)"></app-filters>
   <div class="hotel-rooms-container">
     <h1 class="hotel-heading">Hotel Rooms</h1>
     <p class="hotel-description">
@@ -42,8 +43,6 @@
       </div>
     </div>
 
-    <hr class="hr-line" />
+    <!-- <hr class="hr-line" /> -->
   </div>
-
-  <app-filters (filteredRoomsChange)="updateRooms($event)"></app-filters>
 </div>

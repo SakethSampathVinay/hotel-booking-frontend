@@ -1,78 +1,84 @@
 .exclusive-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 60px 20px;
-  background-color: #f2f2f2;
+  padding: 80px 24px 120px 24px;
 }
 
 .exclusive-heading {
-  font-family: "Poppins", sans-serif;
   font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 600;
   text-align: center;
 }
 
-.exclusive-description {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  color: #555;
+.exculsive-description {
+  max-width: 720px;
   text-align: center;
-  max-width: 700px;
-  margin-bottom: 40px;
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.6;
 }
 
 .total-offer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
+  margin-top: 48px;
   width: 100%;
-  max-width: 1200px;
+}
+
+@media (min-width: 768px) {
+  .total-offer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .total-offer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .exclusive-card-container {
   position: relative;
   background-size: cover;
   background-position: center;
-  border-radius: 16px;
-  overflow: hidden;
-  min-height: 280px;
+  background-repeat: no-repeat;
+  padding: 72px 16px 20px;
+  border-radius: 12px;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.exclusive-card-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
-  z-index: 0;
-}
-
-.exclusive-card-container * {
-  position: relative;
-  z-index: 1;
+  justify-content: center;
+  gap: 2px;
+  min-height: 320px;
 }
 
 .offer-title {
-  font-size: 20px;
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
   font-weight: 600;
-  margin-bottom: 5px;
 }
 
 .offer-description {
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
-.offer-expires-on,
+.offer-expires-on {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .offer-discount {
-  font-size: 13px;
-  font-style: italic;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: white;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 9999px;
 }

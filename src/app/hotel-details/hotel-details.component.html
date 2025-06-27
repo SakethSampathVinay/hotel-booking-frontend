@@ -1,75 +1,102 @@
-<div class="hotel-details-container" *ngIf="hotel">
-  <div class="hotel-details-content-container">
-    <h3 class="hotel-details-name">{{ hotel.hotelName }}</h3>
-    <p class="hotel-details-roomtype">({{ hotel.roomType }})</p>
-    <p class="hotel-details-percentageoff">20%</p>
+<div class="room-details-container">
+  <div class="room-header">
+    <h1 class="room-title">
+      {{ hotel?.hotelName }}
+      <span class="room-type">({{ hotel?.roomType }})</span>
+    </h1>
+    <p class="discount-badge">20% OFF</p>
   </div>
 
-  <p class="hotel-details-address">{{ hotel.streetAddress }}</p>
+  <div class="review-section">
+    <p class="review-count">200+ reviews</p>
+  </div>
 
-  <div class="hotel-details-images">
-    <img class="hotel-image-main" [src]="selectedImage" />
+  <div class="address-section">
+    <span class="address-text">{{ hotel?.streetAddress }}</span>
+  </div>
 
-    <div class="hotel-images-grid">
+  <div class="room-images">
+    <div class="main-image">
+      <img [src]="selectedImage" class="main-room-image" />
+    </div>
+    <div class="image-grid">
       <img
-        *ngFor="let image of hotel.images"
-        class="hotel-grid-image"
+        *ngFor="let image of hotel?.images"
         [src]="image"
         (click)="selectedImage = image"
-        alt="Room Image"
+        [class.active-image]="selectedImage === image"
+        class="grid-image"
       />
     </div>
   </div>
 
-  <div class="hotel-details-price-container">
-    <h2 class="hotel-detail-experience">Experience Luxury Like Never Before</h2>
-    <h2 class="hote-details-pricepernight">₹{{ hotel.pricePerNight }}/night</h2>
+  <div class="highlights-section">
+    <div class="highlight-left">
+      <h1 class="highlight-title">Experience Luxury Like Never Before</h1>
+      <div class="amenities-list">
+        <div *ngFor="let amenity of hotel?.amenities" class="amenity-item">
+          <p class="amenity-label">{{ amenity }}</p>
+        </div>
+      </div>
+    </div>
+    <p class="price">₹{{ hotel?.pricePerNight }}/night</p>
   </div>
 
-  <div class="hotel-details-amenities-container">
-    <div
-      class="hotel-details-amenities"
-      *ngFor="let amenity of hotel.amenities"
-    >
-      {{ amenity }}
+  <form class="booking-form" (ngSubmit)="bookNow()" #bookingForm="ngForm">
+    <div class="form-fields">
+      <div class="form-group">
+        <label for="checkInDate" class="form-label">Check-In</label>
+        <input
+          type="date"
+          id="checkInDate"
+          class="form-input"
+          [(ngModel)]="check_in"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="checkOutDate" class="form-label">Check-Out</label>
+        <input
+          type="date"
+          id="checkOutDate"
+          class="form-input"
+          [(ngModel)]="check_out"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="guests" class="form-label">Guests</label>
+        <input
+          type="number"
+          id="guests"
+          class="form-input short"
+          [(ngModel)]="guest_count"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        />
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">Book Now</button>
+  </form>
+
+  <div class="specifications">
+    <div *ngFor="let spec of roomCommonData" class="spec-item">
+      <img [src]="spec.icon" alt="{{ spec.title }}-icon" class="spec-icon" />
+      <div>
+        <p class="spec-title">{{ spec.title }}</p>
+        <p class="spec-description">{{ spec.description }}</p>
+      </div>
     </div>
   </div>
 
-  <div class="hotel-details-availability">
-    <div class="hotel-details-card-availability">
-      <label class="hotel-details-label">Check-In</label>
-      <input class="hotel-details-date" type="date" [(ngModel)]="check_in" />
-    </div>
-    <div class="hotel-details-card-availability">
-      <label class="hotel-details-label">Check-Out</label>
-      <input class="hotel-details-date" type="date" [(ngModel)]="check_out" />
-    </div>
-    <div class="hotel-details-card-availability">
-      <label class="hotel-details-label">Guests</label>
-      <input
-        class="hotel-details-date"
-        type="number"
-        min="1"
-        [(ngModel)]="guest_count"
-      />
-    </div>
-    <button
-      class="hotel-details-availability-button"
-      (click)="bookNow()"
-      [routerLink]="['/bookings']"
-    >
-      Book Now
-    </button>
-  </div>
-
-  <div class="hotel-details-description">
-    <hr />
+  <div class="room-description">
     <p>
       Guests will be allocated on the ground floor according to availability.
-      You get a comfortable Two bedroom apartment has a true city feeling. The
-      price quoted is for two guests. Please mark the number of guests to get
-      the exact price for groups.
+      You get a comfortable Two bedroom apartment that has a true city feeling.
+      The price quoted is for two guests, at the guest slot please mark the
+      number of guests to get the exact price for groups.
     </p>
-    <hr />
   </div>
 </div>

@@ -1,17 +1,20 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
+import { roomsDummyData, roomCommonData } from '../../assets/assets';
 
 @Component({
   selector: 'app-hotel-details',
-  imports: [NgIf, FormsModule, CommonModule, RouterLink, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './hotel-details.component.html',
   styleUrl: './hotel-details.component.css',
 })
 export class HotelDetailsComponent implements OnInit {
+  roomCommonData = roomCommonData;
+
   data: any[] = [];
   hotel: any;
   selectedImage: string = '';
@@ -27,10 +30,12 @@ export class HotelDetailsComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private route: ActivatedRoute,
-    private bookings: BookingsService
+    private bookings: BookingsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const id = this.route.snapshot.paramMap.get('id');
 
     this.roomService.getRooms().subscribe({
@@ -66,6 +71,7 @@ export class HotelDetailsComponent implements OnInit {
         next: (response) => {
           console.log('Booking Successful: ', response);
           this.bookingData.push(response);
+          this.router.navigate(['/bookings']);
         },
         error: (error) => {
           console.error('Error booking room: ', error);
