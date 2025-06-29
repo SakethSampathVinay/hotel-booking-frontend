@@ -52,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 2px;
-  min-height: 320px;
+  /* min-height: 320px; */
 }
 
 .offer-title {

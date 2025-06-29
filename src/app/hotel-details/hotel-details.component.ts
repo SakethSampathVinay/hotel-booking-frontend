@@ -60,12 +60,13 @@ export class HotelDetailsComponent implements OnInit {
     if (this.check_in && this.check_out && this.guest_count >= 1) {
       const bookingDetails = {
         room_id: id,
-        guest_count: this.guest_count,
+        guest_count: this.guest_count || 0,
         check_in: this.check_in,
         check_out: this.check_out,
         image: this.selectedImage || (this.hotel.images?.[0] ?? ''),
         name: this.hotel.hotelName || '',
         address: this.hotel.streetAddress || '',
+        pricePerNight: this.hotel.pricePerNight || 0,
       };
       this.bookings.bookRoom(bookingDetails).subscribe({
         next: (response) => {

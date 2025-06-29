@@ -84,7 +84,7 @@
   <div class="specifications">
     <div *ngFor="let spec of roomCommonData" class="spec-item">
       <img [src]="spec.icon" alt="{{ spec.title }}-icon" class="spec-icon" />
-      <div>
+      <div class="specifications-content">
         <p class="spec-title">{{ spec.title }}</p>
         <p class="spec-description">{{ spec.description }}</p>
       </div>

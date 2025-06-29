@@ -7,46 +7,48 @@
     </p>
   </div>
 
-  <div class="table-header">
-    <p class="col hotels-col">Hotels</p>
-    <p class="col date-col">Date & Timings</p>
-    <p class="col payment-col">Payment</p>
-  </div>
-
   <div class="booking-card" *ngFor="let booking of bookingsData">
+    <!-- Hotel Information -->
     <div class="hotel-info">
       <img [src]="booking.image" alt="Hotel room" class="hotel-image" />
       <div class="hotel-details">
         <h1 class="hotel-name">{{ booking.name }}</h1>
         <p class="hotel-address">{{ booking.address }}</p>
         <p class="hotel-guests">Guests: {{ booking.guest_count }}</p>
+        <p class="hotel-price">
+          Amount: ₹{{ booking.pricePerNight }}
+        </p>
       </div>
     </div>
 
-    <div class="checkin-info">
-      <label class="date-label">Check-In</label>
-      <p class="date-text">{{ booking.check_in | date : "mediumDate" }}</p>
-    </div>
+    <!-- Dates & Payment -->
+    <div class="data-payment-container">
+      <div class="checkin-info">
+        <label class="date-label">Check-In</label>
+        <p class="date-text">{{ booking.check_in | date : "mediumDate" }}</p>
+      </div>
 
-    <div class="checkout-info">
-      <label class="date-label">Check-Out</label>
-      <p class="date-text">{{ booking.check_out | date : "mediumDate" }}</p>
-    </div>
+      <div class="checkout-info">
+        <label class="date-label">Check-Out</label>
+        <p class="date-text">{{ booking.check_out | date : "mediumDate" }}</p>
+      </div>
 
-    <div class="payment-status">
-      <p *ngIf="booking.isPaid; else unpaid" class="payment-text">Paid</p>
-      <ng-template #unpaid>
-        <p class="payment-failure" *ngIf="booking.status !== 'Paid'">Pending</p>
-        <p class="payment-success" *ngIf="booking.status === 'Paid'">Paid</p>
-
-        <button
-          class="pay-now-button"
-          (click)="isPaidfn(booking)"
-          *ngIf="booking.status !== 'Paid'"
+      <div class="payment-status">
+        <!-- Paid / Pending Status -->
+        <p
+          *ngIf="booking.status === 'Paid'; else pending"
+          class="payment-success"
         >
-          Pay now
-        </button>
-      </ng-template>
+          Paid
+        </p>
+
+        <ng-template #pending>
+          <p class="payment-failure">Pending</p>
+          <button class="pay-now-button" (click)="makePayment(booking)">
+            Pay ₹{{ booking.pricePerNight }}
+          </button>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

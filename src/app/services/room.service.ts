@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RoomService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com/';
+  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com';
 
   constructor(private http: HttpClient) {}
 

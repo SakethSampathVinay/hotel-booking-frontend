@@ -20,6 +20,7 @@ export class HotelBookingsComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingService.getBooking().subscribe({
       next: (response) => {
+        console.log('🧾 Full bookings:', response);
         return (this.bookingsData = response.bookings);
       },
       error: (error) => {
@@ -30,8 +31,6 @@ export class HotelBookingsComponent {
   }
 
   isPaidfn(booking: any) {
-    console.log('🧾 Full booking object:', booking); // ✅ Add this
-    console.log('🧾 Sending booking_id:', booking._id); // ← Add this to debug
     this.bookingService.updateBookingPaid(booking._id).subscribe({
       next: (res) => {
         booking.status = 'Paid';
@@ -41,5 +40,14 @@ export class HotelBookingsComponent {
         console.error('❌ Payment update failed:', err);
       },
     });
+  }
+
+  makePayment(booking: any) {
+    const amount = booking.pricePerNight;
+    const roomId = booking.room_id || booking.roomId;
+    const bookingId = booking._id;
+    const name = booking.name;
+
+    this.bookingService.makePayment(amount, name, roomId, bookingId);
   }
 }

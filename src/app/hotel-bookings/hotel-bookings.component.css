@@ -26,11 +26,12 @@
 /* Flex header like md:flex */
 .table-header {
   display: none;
-  justify-content: space-between;
+  justify-content: space-around;
   border-bottom: 1px solid #d1d5db;
   font-weight: 500;
   font-size: 1rem;
   padding: 0.75rem 0;
+  padding-left: 200px;
 }
 
 @media (min-width: 768px) {
@@ -42,6 +43,7 @@
   .date-col,
   .payment-col {
     width: 33%;
+    align-self: flex-end;
   }
 }
 
@@ -49,12 +51,13 @@
 .booking-card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2rem;
   border-bottom: 1px solid #d1d5db;
   padding: 1.5rem 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .booking-card {
     flex-direction: row;
     justify-content: space-between;
@@ -80,29 +83,54 @@
 .hotel-details {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .hotel-name {
   font-size: 1.5rem;
   font-family: "Playfair Display", serif;
+  margin-bottom: 0.25rem;
 }
 
 .hotel-address,
 .hotel-guests {
   font-size: 0.875rem;
   color: #6b7280;
+  margin-bottom: 0.25rem;
 }
 
-/* Date Info Section */
+/* Dates and Payment container - row for all, equal width on md+ */
+.data-payment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Small screen: natural width */
 .checkin-info,
-.checkout-info {
+.checkout-info,
+.payment-status {
   display: flex;
   flex-direction: column;
-  flex: 1;
   gap: 0.25rem;
 }
 
+/* Medium and up: equal widths */
+@media (min-width: 768px) {
+  .data-payment-container {
+    gap: 2rem;
+    width: 500px;
+  }
+
+  .checkin-info,
+  .checkout-info,
+  .payment-status {
+    flex: 1;
+  }
+}
+
+/* Date label styling */
 .date-label {
   font-size: 0.875rem;
   font-weight: 600;
@@ -115,16 +143,12 @@
 
 /* Payment Status */
 .payment-status {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   gap: 0.5rem;
-  flex: 1;
 }
 
 .payment-text {
   font-size: 0.875rem;
-  color: #10b981; /* Tailwind green-500 */
+  color: #10b981; /* green-500 */
   font-weight: 500;
 }
 

@@ -1,13 +1,12 @@
-/* Room Details Container */
 .room-details-container {
   padding: 3rem 1rem;
   font-family: "Roboto", sans-serif;
   max-width: 1200px;
   margin: auto;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
+  margin-top: 70px;
 }
 
-/* Header */
 .room-header {
   display: flex;
   flex-wrap: wrap;
@@ -32,13 +31,13 @@
   font-size: 0.75rem;
 }
 
-/* Reviews */
 .review-section {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: -10px;
 }
+
 .review-count {
   font-size: 0.875rem;
   color: #555;
@@ -88,7 +87,6 @@
   border-color: #f97316;
 }
 
-/* Highlights */
 .highlights-section {
   display: flex;
   flex-wrap: wrap;
@@ -119,17 +117,16 @@
   height: 1.25rem;
 }
 .amenity-label {
-  font-size: 0.75rem;
+  font-size: 15px;
   color: #333;
 }
 .price {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2e7d32;
+  color: #666;
   white-space: nowrap;
 }
 
-/* Booking Form */
 .booking-form {
   display: flex;
   flex-direction: column;
@@ -180,32 +177,38 @@
   background-color: #2563eb;
 }
 
-/* Specifications */
 .specifications {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  /* gap: 1rem; */
 }
 .spec-item {
   display: flex;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
   align-items: flex-start;
+  margin-bottom: -20px;
 }
 .spec-icon {
   width: 1.625rem;
   height: 1.625rem;
+  display: flex;
+  align-self: center;
+}
+.specifications-content {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-top: 2px;
 }
 .spec-title {
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-bottom: -10px;
 }
 .spec-description {
   font-size: 0.875rem;
   color: #555;
 }
 
-/* Description */
 .room-description {
   margin-top: 2rem;
   padding: 1.5rem;
