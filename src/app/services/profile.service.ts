@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ProfileService {
-  private apiUrl = 'http://127.0.0.1:5000';
+  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com';
 
   constructor(private http: HttpClient) {}
 
