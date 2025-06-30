@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { loginSignupGuard } from './guards/login-signup.guard';
 import { RenderMode } from '@angular/ssr';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [loginSignupGuard] },
@@ -41,6 +42,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: 'about', component: AboutComponent, canActivate: [authGuard] },
+  { path: "profile", component: ProfileComponent, canActivate: [authGuard]},
 
   { path: '**', component: PageNotFoundComponent },
 ];

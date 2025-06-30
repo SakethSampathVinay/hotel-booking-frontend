@@ -1,0 +1,33 @@
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-avatar" alt="User Avatar" />
+
+    <h2 class="profile-name">
+      {{ profileData.name }}
+    </h2>
+
+    <hr />
+
+    <h4>CONTACT INFORMATION</h4>
+
+    <div class="info-line">
+      <label>Email:</label>
+      <span *ngIf="!isEditMode">{{ profileData.email }}</span>
+      <input *ngIf="isEditMode" [(ngModel)]="profileData.email" type="email" />
+    </div>
+
+    <div class="info-line">
+      <label>Phone:</label>
+      <span *ngIf="!isEditMode">{{ profileData.phone }}</span>
+      <input *ngIf="isEditMode" [(ngModel)]="profileData.phone" type="text" />
+    </div>
+
+    <div class="button-group">
+      <button *ngIf="!isEditMode" (click)="isEditMode = true">Edit</button>
+      <button *ngIf="isEditMode" (click)="updateProfileDetails(); isEditMode = false">Save</button>
+      <button *ngIf="isEditMode" (click)="isEditMode = false">Cancel</button>
+      <button (click)="logout()">Logout</button>
+      <button (click)="deleteProfile()">Delete Account</button>
+    </div>
+  </div>
+</div>

@@ -10,9 +10,9 @@ declare var Razorpay: any;
   providedIn: 'root',
 })
 export class BookingsService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com/'; 
+  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com/';
   //  https://hotel-booking-backend-74ai.onrender.com/
-// http://127.0.0.1:5000/
+  // http://127.0.0.1:5000/
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -50,17 +50,17 @@ export class BookingsService {
     roomId: string,
     bookingId: string
   ): void {
-    const url = `http://127.0.0.1:5000/payment`;
+    const url = `${this.apiUrl}api/create-order`;
     const headers = this.getAuthHeaders();
 
     this.http
-      .post<any>(url, { amount, roomd_id: roomId }, { headers })
+      .post<any>(url, { amount, room_id: roomId }, { headers })
       .subscribe((order) => {
         const options = {
           key: 'rzp_test_L0PKrkZl2dGUmB',
           amount: order.amount,
           currency: 'INR',
-          name: order.name,
+          name: name,
           order_id: order.id,
           handler: (response: any) => {
             console.log('Payment Success: ', response);
@@ -71,8 +71,8 @@ export class BookingsService {
             email: 'test@example.com',
           },
           notes: {
-            bookingId: bookingId,
-            roomId: roomId,
+            bookingId,
+            roomId,
           },
           theme: {
             color: '#3399cc',
@@ -88,10 +88,10 @@ export class BookingsService {
     amount: number,
     roomId: string,
     bookingId: string
-  ) {
+  ): void {
     const bookingData = {
       amount,
-      roomId,
+      room_id: roomId,
       booking_id: bookingId,
       razorpay_payment_id: response.razorpay_payment_id,
       razorpay_order_id: response.razorpay_order_id,
@@ -99,11 +99,9 @@ export class BookingsService {
     };
 
     this.http
-      .post(
-        'http://127.0.0.1:5000/api/confirm-booking',
-        bookingData,
-        { headers: this.getAuthHeaders() }
-      )
+      .post(`${this.apiUrl}api/confirm-booking`, bookingData, {
+        headers: this.getAuthHeaders(),
+      })
       .subscribe({
         next: (res) => {
           alert('🎉 Booking confirmed!');
