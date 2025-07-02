@@ -11,17 +11,10 @@
       No Rooms are Available
     </h1>
 
-    <div
-      class="hotel-rooms-card-container"
-      *ngFor="let room of filteredRooms; trackBy: trackByRoom"
-      [routerLink]="['/rooms', room._id]"
-    >
+    <div class="hotel-rooms-card-container" *ngFor="let room of filteredRooms; trackBy: trackByRoom"
+      [routerLink]="['/rooms', room._id]">
       <div class="hotel-rooms-content-container">
-        <img
-          class="image"
-          [src]="room.images[0] || 'https://via.placeholder.com/350x250'"
-          alt="Room Image"
-        />
+        <img class="image" [src]="'https://hotel-booking-backend-74ai.onrender.com/' + room.images[0]" alt="Room Image" />
 
         <div class="hotel-rooms-content-card-container">
           <p class="hotel-rooms-city" *ngIf="room.roomType">
@@ -42,7 +35,5 @@
         </div>
       </div>
     </div>
-
-    <!-- <hr class="hr-line" /> -->
   </div>
 </div>
