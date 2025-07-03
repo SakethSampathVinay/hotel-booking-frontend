@@ -1,0 +1,24 @@
+<div class="chatbot-launcher" (click)="toggleChat()" *ngIf="!showChat">
+    💬
+</div>
+
+<div class="chatbot-container" *ngIf="showChat">
+    <div class="chat-header">
+        <span>🤖 EasyStay Assistant</span>
+        <button (click)="toggleChat()">✖</button>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+        <div *ngFor="let chat of chatHistory" [ngClass]="chat.sender">
+            <div class="message">{{ chat.message }}</div>
+        </div>
+        <div *ngIf="loading" class="bot">
+            <div class="message">Typing...</div>
+        </div>
+    </div>
+
+    <form (submit)="sendMessage()" class="chat-input">
+        <input [(ngModel)]="userInput" name="message" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+    </form>
+</div>

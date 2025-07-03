@@ -11,10 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title = 'EasyStay - Hotel Booking Application';
   isPublicRoute = false;
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isPublicRoute = ['/login', '/signup'].includes(this.router.url);
       }
