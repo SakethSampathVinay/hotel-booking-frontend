@@ -16,6 +16,9 @@ export class ChatbotComponent {
 
   constructor(private http: HttpClient) {}
 
+  // http://127.0.0.1:5000/
+  // https://hotel-booking-backend-74ai.onrender.com/chat
+
   sendMessage(): void {
     const message = this.userInput.trim();
     if (!message) return;

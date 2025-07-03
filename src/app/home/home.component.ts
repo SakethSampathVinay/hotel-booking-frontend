@@ -6,6 +6,7 @@ import { ExclusiveOffersComponent } from './exclusive-offers/exclusive-offers.co
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { StayInspiredComponent } from './stay-inspired/stay-inspired.component';
 import { FooterComponent } from '../footer/footer.component';
+import { ChatbotComponent } from "../chatbot/chatbot.component";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { FooterComponent } from '../footer/footer.component';
     ExclusiveOffersComponent,
     TestimonialsComponent,
     StayInspiredComponent,
-  ],
+    ChatbotComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
