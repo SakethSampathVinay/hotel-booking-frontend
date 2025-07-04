@@ -14,7 +14,8 @@
     <div class="hotel-rooms-card-container" *ngFor="let room of filteredRooms; trackBy: trackByRoom"
       [routerLink]="['/rooms', room._id]">
       <div class="hotel-rooms-content-container">
-        <img class="image" [src]="'https://hotel-booking-backend-74ai.onrender.com/' + room.images[0]" alt="Room Image" />
+        <img class="image" [src]="'https://hotel-booking-backend-74ai.onrender.com/' + room.images[0]"
+          alt="Room Image" />
 
         <div class="hotel-rooms-content-card-container">
           <p class="hotel-rooms-city" *ngIf="room.roomType">
@@ -30,7 +31,7 @@
             Amenities: {{ room.amenities.join(", ") }}
           </p>
           <p class="hotel-rooms-pricepernight">
-            ₹{{ room.pricePerNight }} / night
+            ${{ room.pricePerNight }} / night
           </p>
         </div>
       </div>

@@ -34,20 +34,22 @@
       </div>
 
       <div class="payment-status">
-        <!-- Paid / Pending Status -->
-        <p
-          *ngIf="booking.status === 'Paid'; else pending"
-          class="payment-success"
-        >
+
+        <p class="payment-success" *ngIf="booking.status === 'Paid'">
           Paid
         </p>
 
-        <ng-template #pending>
+        <p class="payment-cancelled" *ngIf="booking.status === 'Cancelled'">
+          Cancelled
+        </p>
+
+        <ng-container *ngIf="booking.status === 'pending'">
           <p class="payment-failure">Pending</p>
           <button class="pay-now-button" (click)="makePayment(booking)">
             Pay ₹{{ booking.pricePerNight }}
           </button>
-        </ng-template>
+          <button (click)="cancelBooking(booking._id)" class="pay-now-button">Cancel Booking</button>
+        </ng-container>
       </div>
     </div>
   </div>

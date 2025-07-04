@@ -13,7 +13,7 @@ import { roomCommonData } from '../../assets/assets';
   styleUrl: './hotel-details.component.css',
 })
 export class HotelDetailsComponent implements OnInit {
-  roomCommonData = roomCommonData
+  roomCommonData = roomCommonData;
   backendBaseUrl = 'https://hotel-booking-backend-74ai.onrender.com';
 
   data: any[] = [];
@@ -46,7 +46,6 @@ export class HotelDetailsComponent implements OnInit {
         console.log('Fetched hotel:', this.hotel);
 
         if (this.hotel && Array.isArray(this.hotel.images)) {
-          // Normalize image paths (handle local and external URLs)
           this.hotel.images = this.hotel.images.map((img: string) =>
             img.startsWith('http')
               ? img

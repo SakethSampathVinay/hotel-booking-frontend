@@ -175,3 +175,8 @@
 .pay-now-button:hover {
   background-color: #f9fafb;
 }
+
+.payment-cancelled {
+  color: red;
+  font-weight: bold;
+}

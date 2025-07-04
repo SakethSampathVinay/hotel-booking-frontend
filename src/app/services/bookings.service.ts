@@ -44,6 +44,11 @@ export class BookingsService {
     });
   }
 
+  cancelBooking(bookingId: string): Observable<any> {
+    const url = `${this.apiUrl}cancel-booking/${bookingId}`;
+    return this.http.delete(url, { headers: this.getAuthHeaders() });
+  }
+
   makePayment(
     amount: number,
     name: string,

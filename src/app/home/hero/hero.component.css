@@ -94,3 +94,31 @@
 .search-input-button:hover {
   background-color: #222;
 }
+
+.hero-tagline {
+  font-size: 1.1rem;
+  color: white;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.hero-cta-btn {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-features {
+  margin-top: 24px;
+  display: flex;
+  gap: 20px;
+  font-size: 15px;
+  color: white;
+  flex-wrap: wrap;
+}

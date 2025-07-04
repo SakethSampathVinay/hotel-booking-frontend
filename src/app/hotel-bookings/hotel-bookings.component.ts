@@ -50,4 +50,10 @@ export class HotelBookingsComponent {
 
     this.bookingService.makePayment(amount, name, roomId, bookingId);
   }
+
+  cancelBooking(id: string): void {
+    this.bookingService.cancelBooking(id).subscribe((data: any) => {
+      console.log('Successfully Cancelled the Booking');
+    });
+  }
 }
