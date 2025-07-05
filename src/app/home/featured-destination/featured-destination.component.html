@@ -8,7 +8,7 @@
   <div class="featured-total-container">
     <div
       class="featured-card-container"
-      *ngFor="let room of rooms.slice(0, 4)"
+      *ngFor="let room of rooms.slice(0, 3)"
       [routerLink]="['/rooms', room._id]"
     >
       <img [src]="room.images[0]" alt="Room Image" class="featured-image" />
@@ -17,7 +17,7 @@
         <p class="featured-address">{{ room.streetAddress }}</p>
         <div class="featured-price-container">
           <h3 class="featured-price">${{ room.pricePerNight }}/night</h3>
-          <button class="featured-book-now-button">Book now</button>
+          <button class="featured-book-now-button">View Details</button>
         </div>
       </div>
     </div>

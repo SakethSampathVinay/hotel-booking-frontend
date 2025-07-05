@@ -10,13 +10,13 @@
   <div class="booking-card" *ngFor="let booking of bookingsData">
     <!-- Hotel Information -->
     <div class="hotel-info">
-      <img [src]="booking.image" alt="Hotel room" class="hotel-image" />
+      <img [src]="booking.image[0]" alt="Hotel room" class="hotel-image" />
       <div class="hotel-details">
         <h1 class="hotel-name">{{ booking.name }}</h1>
         <p class="hotel-address">{{ booking.address }}</p>
         <p class="hotel-guests">Guests: {{ booking.guest_count }}</p>
         <p class="hotel-price">
-          Amount: ₹{{ booking.pricePerNight }}
+          Amount: ${{ booking.pricePerNight }}
         </p>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <ng-container *ngIf="booking.status === 'pending'">
           <p class="payment-failure">Pending</p>
           <button class="pay-now-button" (click)="makePayment(booking)">
-            Pay ₹{{ booking.pricePerNight }}
+            Pay ${{ booking.pricePerNight }}
           </button>
           <button (click)="cancelBooking(booking._id)" class="pay-now-button">Cancel Booking</button>
         </ng-container>

@@ -13,23 +13,26 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   name: string = '';
   email: string = '';
+  phone: string = '';
   password: string = '';
   message: string = '';
 
   constructor(private signupSerive: LoginService, private router: Router) {}
 
   onSignup(): void {
-    this.signupSerive.signup(this.name, this.email, this.password).subscribe({
-      next: (response) => {
-        console.log('Signup Successfully', response);
-        this.message = 'Signup successful! Please log in.';
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Signup failed', error);
-      },
-    });
+    this.signupSerive
+      .signup(this.name, this.email, this.phone, this.password)
+      .subscribe({
+        next: (response) => {
+          console.log('Signup Successfully', response);
+          this.message = 'Signup successful! Please log in.';
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Signup failed', error);
+        },
+      });
   }
 
   onLoginRedirect(): void {
