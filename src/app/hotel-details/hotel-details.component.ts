@@ -24,7 +24,11 @@ export class HotelDetailsComponent implements OnInit {
   check_out: string = '';
   guest_count: number = 1;
 
+  rating: number = 5;
+  comment: string = '';
+
   bookingData: any[] = [];
+  feedbackData: any[] = [];
 
   constructor(
     private roomService: RoomService,
@@ -67,6 +71,8 @@ export class HotelDetailsComponent implements OnInit {
         this.data = [];
       },
     });
+
+    this.getFeedback(id!);
   }
 
   bookNow(): void {
@@ -98,6 +104,33 @@ export class HotelDetailsComponent implements OnInit {
         console.error('Error booking room:', error);
         alert('Error booking room. Please try again later.');
       },
+    });
+  }
+
+  submitFeedback(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    const payload = {
+      hotel_id: id,
+      rating: this.rating,
+      comment: this.comment,
+    };
+
+    this.bookings.postFeedback(payload).subscribe({
+      next: (response) => {
+        console.log('Feedback submitted successfully:', response);
+        this.comment = '';
+        this.getFeedback(id!);
+      }, 
+      error: () => {
+        console.log('Error submitting feedback.');
+      }
+    })
+  }
+
+  getFeedback(hotelId: string): void {
+    this.bookings.getFeedback(hotelId).subscribe((data) => {
+      this.feedbackData = data;
     });
   }
 }

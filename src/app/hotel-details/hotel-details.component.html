@@ -20,13 +20,8 @@
       <img [src]="selectedImage" class="main-room-image" />
     </div>
     <div class="image-grid">
-      <img
-        *ngFor="let image of hotel?.images"
-        [src]="image"
-        (click)="selectedImage = image"
-        [class.active-image]="selectedImage === image"
-        class="grid-image"
-      />
+      <img *ngFor="let image of hotel?.images" [src]="image" (click)="selectedImage = image"
+        [class.active-image]="selectedImage === image" class="grid-image" />
     </div>
   </div>
 
@@ -46,36 +41,18 @@
     <div class="form-fields">
       <div class="form-group">
         <label for="checkInDate" class="form-label">Check-In</label>
-        <input
-          type="date"
-          id="checkInDate"
-          class="form-input"
-          [(ngModel)]="check_in"
-          [ngModelOptions]="{ standalone: true }"
-          required
-        />
+        <input type="date" id="checkInDate" class="form-input" [(ngModel)]="check_in"
+          [ngModelOptions]="{ standalone: true }" required />
       </div>
       <div class="form-group">
         <label for="checkOutDate" class="form-label">Check-Out</label>
-        <input
-          type="date"
-          id="checkOutDate"
-          class="form-input"
-          [(ngModel)]="check_out"
-          [ngModelOptions]="{ standalone: true }"
-          required
-        />
+        <input type="date" id="checkOutDate" class="form-input" [(ngModel)]="check_out"
+          [ngModelOptions]="{ standalone: true }" required />
       </div>
       <div class="form-group">
         <label for="guests" class="form-label">Guests</label>
-        <input
-          type="number"
-          id="guests"
-          class="form-input short"
-          [(ngModel)]="guest_count"
-          [ngModelOptions]="{ standalone: true }"
-          required
-        />
+        <input type="number" id="guests" class="form-input short" [(ngModel)]="guest_count"
+          [ngModelOptions]="{ standalone: true }" required />
       </div>
     </div>
     <button type="submit" class="submit-btn">Book Now</button>
@@ -99,4 +76,30 @@
       number of guests to get the exact price for groups.
     </p>
   </div>
+
+  <!-- Feedback Form -->
+  <div class="feedback-form">
+    <h3>Leave a Review</h3>
+    <form (ngSubmit)="submitFeedback()">
+      <label>Rating</label>
+      <select [(ngModel)]="rating" name="rating">
+        <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{r}}</option>
+      </select>
+
+      <label>Comment</label>
+      <textarea [(ngModel)]="comment" name="comment" rows="3"></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </div>
+
+  <!-- Feedback List -->
+  <div class="feedback-list" *ngIf="feedbackData.length">
+    <h3>User Reviews</h3>
+    <div *ngFor="let f of feedbackData">
+      <p><strong>{{ f.rating }} ⭐</strong> - {{ f.comment }}</p>
+      <hr />
+    </div>
+  </div>
+
 </div>

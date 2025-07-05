@@ -118,4 +118,14 @@ export class BookingsService {
         },
       });
   }
+
+  postFeedback(data: any): Observable<any> {
+    const url = `${this.apiUrl}add-feedback`;
+    return this.http.post(url, data, { headers: this.getAuthHeaders() });
+  }
+
+  getFeedback(hotelId: string): Observable<any> {
+    const url = `${this.apiUrl}get-feedback/${hotelId}`;
+    return this.http.get(url, { headers: this.getAuthHeaders()});
+  } 
 }
