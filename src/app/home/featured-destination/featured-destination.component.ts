@@ -14,20 +14,21 @@ import { rmSync } from 'fs';
   styleUrls: ['./featured-destination.component.css'],
 })
 export class FeaturedDestinationComponent {
-
-  constructor(private roomService: RoomService){} 
+  constructor(private roomService: RoomService) {}
 
   rooms: any[] = [];
 
   ngOnInit() {
     this.roomService.getRooms().subscribe({
       next: (response) => {
-        this.rooms = response;
+        this.rooms = response.map((room: any) => {
+          return room;
+        });
       },
       error: (error) => {
         console.error('Error fetching rooms:', error);
         this.rooms = [];
-      }
-    })
+      },
+    });
   }
 }

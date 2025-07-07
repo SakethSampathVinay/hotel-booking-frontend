@@ -20,7 +20,6 @@ export class HotelBookingsComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingService.getBooking().subscribe({
       next: (response) => {
-        console.log('🧾 Full bookings:', response);
         return (this.bookingsData = response.bookings);
       },
       error: (error) => {
@@ -34,10 +33,10 @@ export class HotelBookingsComponent {
     this.bookingService.updateBookingPaid(booking._id).subscribe({
       next: (res) => {
         booking.status = 'Paid';
-        console.log('✅ Payment updated:', res);
+        console.log('Payment updated:', res);
       },
       error: (err) => {
-        console.error('❌ Payment update failed:', err);
+        console.error('Payment update failed:', err);
       },
     });
   }

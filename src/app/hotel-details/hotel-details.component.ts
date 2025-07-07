@@ -14,7 +14,6 @@ import { roomCommonData } from '../../assets/assets';
 })
 export class HotelDetailsComponent implements OnInit {
   roomCommonData = roomCommonData;
-  backendBaseUrl = 'https://hotel-booking-backend-74ai.onrender.com';
 
   data: any[] = [];
   hotel: any;
@@ -30,7 +29,7 @@ export class HotelDetailsComponent implements OnInit {
   bookingData: any[] = [];
   feedbackData: any[] = [];
 
-  minDate: string = '';
+  minDate: string = "";
 
   constructor(
     private roomService: RoomService,
@@ -44,20 +43,12 @@ export class HotelDetailsComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
 
-    this.roomService.getRooms().subscribe({
-      next: (response) => {
+    this.roomService.getRooms().subscribe(
+      (response) => {
         this.data = response;
         this.hotel = this.data.find((room) => room._id === id);
-
-        console.log('Fetched hotel:', this.hotel);
-
+        
         if (this.hotel && Array.isArray(this.hotel.images)) {
-          this.hotel.images = this.hotel.images.map((img: string) =>
-            img.startsWith('http')
-              ? img
-              : `https://hotel-booking-backend-74ai.onrender.com/${img}`
-          );
-
           if (this.hotel.images.length > 0) {
             this.selectedImage = this.hotel.images[0];
           } else {
@@ -68,11 +59,11 @@ export class HotelDetailsComponent implements OnInit {
           console.warn('Hotel images not found or not an array.');
         }
       },
-      error: (error) => {
+      (error) => {
         console.error('Error fetching rooms:', error);
         this.data = [];
-      },
-    });
+      }
+    );
 
     this.getFeedback(id!);
 
@@ -126,11 +117,11 @@ export class HotelDetailsComponent implements OnInit {
         console.log('Feedback submitted successfully:', response);
         this.comment = '';
         this.getFeedback(id!);
-      },
+      }, 
       error: () => {
         console.log('Error submitting feedback.');
-      },
-    });
+      }
+    })
   }
 
   getFeedback(hotelId: string): void {

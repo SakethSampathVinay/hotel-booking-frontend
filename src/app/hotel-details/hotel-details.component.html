@@ -19,12 +19,14 @@
     <div class="main-image">
       <img [src]="selectedImage" class="main-room-image" />
     </div>
-    <div class="image-grid">
-      <img *ngFor="let image of hotel?.images" [src]="image" (click)="selectedImage = image"
-        [class.active-image]="selectedImage === image" class="grid-image" />
+    <div class="image-grid" *ngIf="hotel?.images?.length">
+      <ng-container *ngFor="let image of hotel.images">
+        <img [src]="image" (click)="selectedImage = image" alt="Hotel Details Image"
+          [class.active-image]="selectedImage === image" class="grid-image" />
+      </ng-container>
+
     </div>
   </div>
-
   <div class="highlights-section">
     <div class="highlight-left">
       <h1 class="highlight-title">Experience Luxury Like Never Before</h1>

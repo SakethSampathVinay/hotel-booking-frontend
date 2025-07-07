@@ -8,9 +8,8 @@
   </div>
 
   <div class="booking-card" *ngFor="let booking of bookingsData">
-    <!-- Hotel Information -->
     <div class="hotel-info">
-      <img [src]="booking.image[0]" alt="Hotel room" class="hotel-image" />
+      <img [src]="booking.image" alt="Hotel room" class="hotel-image" />
       <div class="hotel-details">
         <h1 class="hotel-name">{{ booking.name }}</h1>
         <p class="hotel-address">{{ booking.address }}</p>
@@ -21,7 +20,6 @@
       </div>
     </div>
 
-    <!-- Dates & Payment -->
     <div class="data-payment-container">
       <div class="checkin-info">
         <label class="date-label">Check-In</label>

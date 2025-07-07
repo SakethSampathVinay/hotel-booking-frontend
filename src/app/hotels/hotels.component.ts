@@ -20,6 +20,7 @@ export class HotelsComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.roomService.getRooms().subscribe({
       next: (response) => {
+        console.log(this.filteredRooms)
         this.filteredRooms = response;
       },
       error: (error) => {
