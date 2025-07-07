@@ -77,7 +77,6 @@
     </p>
   </div>
 
-  <!-- Feedback Form -->
   <div class="feedback-form">
     <h3>Leave a Review</h3>
     <form (ngSubmit)="submitFeedback()">
@@ -93,13 +92,20 @@
     </form>
   </div>
 
-  <!-- Feedback List -->
   <div class="feedback-list" *ngIf="feedbackData.length">
     <h3>User Reviews</h3>
-    <div *ngFor="let f of feedbackData">
-      <p><strong>{{ f.rating }} ⭐</strong> - {{ f.comment }}</p>
-      <hr />
+    <div *ngFor="let f of feedbackData" class="feedback-card">
+      <div class="feedback-rating">
+        <span class="stars">
+          <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+            <span [class.filled]="i < f.rating">★</span>
+          </ng-container>
+        </span>
+        <span class="rating-number">{{ f.rating }}/5</span>
+      </div>
+      <p class="feedback-comment">“{{ f.comment }}”</p>
     </div>
   </div>
+
 
 </div>
