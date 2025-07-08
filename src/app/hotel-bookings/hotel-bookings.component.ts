@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, RESPONSE_INIT } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BookingsService } from '../services/bookings.service';
 
@@ -20,6 +20,7 @@ export class HotelBookingsComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingService.getBooking().subscribe({
       next: (response) => {
+        console.log(response.bookings);
         return (this.bookingsData = response.bookings);
       },
       error: (error) => {
@@ -42,7 +43,7 @@ export class HotelBookingsComponent {
   }
 
   makePayment(booking: any) {
-    const amount = booking.pricePerNight;
+    const amount = booking.totalAmount;
     const roomId = booking.room_id || booking.roomId;
     const bookingId = booking._id;
     const name = booking.name;

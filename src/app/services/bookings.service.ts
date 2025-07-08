@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { url } from 'inspector';
 import { Observable } from 'rxjs';
-import { roomsDummyData } from '../../assets/assets';
 
 declare var Razorpay: any;
 
@@ -126,6 +124,11 @@ export class BookingsService {
 
   getFeedback(hotelId: string): Observable<any> {
     const url = `${this.apiUrl}get-feedback/${hotelId}`;
-    return this.http.get(url, { headers: this.getAuthHeaders()});
-  } 
+    return this.http.get(url, { headers: this.getAuthHeaders() });
+  }
+
+  calculateBooking(bookingData: string): Observable<any> {
+    const url = `${this.apiUrl}calculate-booking`;
+    return this.http.post(url, bookingData, { headers: this.getAuthHeaders() });
+  }
 }

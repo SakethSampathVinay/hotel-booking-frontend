@@ -1,13 +1,10 @@
 <div class="filters-wrapper">
-  <!-- Mobile Toggle Button -->
   <button class="filters-toggle-btn" (click)="showMobileFilters = true">
     Filters
   </button>
 
-  <!-- Backdrop -->
   <div class="filters-backdrop" *ngIf="showMobileFilters" (click)="showMobileFilters = false"></div>
 
-  <!-- Mobile Sidebar -->
   <div class="filters-sidebar mobile" *ngIf="showMobileFilters">
     <div class="filters-header">
       <h2>Filters</h2>
@@ -16,13 +13,11 @@
     <ng-container *ngTemplateOutlet="filtersContent"></ng-container>
   </div>
 
-  <!-- Desktop Sidebar (Always visible on large screens) -->
   <div class="filters-sidebar desktop">
     <ng-container *ngTemplateOutlet="filtersContent"></ng-container>
   </div>
 </div>
 
-<!-- Shared filter content -->
 <ng-template #filtersContent>
   <div class="filters-section">
     <h3>Popular Filters</h3>

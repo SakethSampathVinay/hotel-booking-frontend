@@ -15,7 +15,7 @@
         <p class="hotel-address">{{ booking.address }}</p>
         <p class="hotel-guests">Guests: {{ booking.guest_count }}</p>
         <p class="hotel-price">
-          Amount: ${{ booking.pricePerNight }}
+          Total Amount: ₹{{booking.totalAmount}}
         </p>
       </div>
     </div>
@@ -44,7 +44,7 @@
         <ng-container *ngIf="booking.status === 'pending'">
           <p class="payment-failure">Pending</p>
           <button class="pay-now-button" (click)="makePayment(booking)">
-            Pay ${{ booking.pricePerNight }}
+            Pay ₹{{ booking.totalAmount }}
           </button>
           <button (click)="cancelBooking(booking._id)" class="pay-now-button">Cancel Booking</button>
         </ng-container>

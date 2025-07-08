@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
 import { roomCommonData } from '../../assets/assets';
+import { response } from 'express';
 @Component({
   selector: 'app-hotel-details',
   standalone: true,
@@ -26,10 +27,12 @@ export class HotelDetailsComponent implements OnInit {
   rating: number = 5;
   comment: string = '';
 
-  bookingData: any[] = [];
+  bookingData: any = {};
   feedbackData: any[] = [];
+  bookingSummary: any = null;
 
-  minDate: string = "";
+  minDate: string = '';
+  minDateCheckOut: string = ''
 
   constructor(
     private roomService: RoomService,
@@ -43,11 +46,17 @@ export class HotelDetailsComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
 
+    const today = new Date();
+    const checkOutMinDate = new Date(today);
+    checkOutMinDate.setDate(today.getDate() + 1);
+    this.minDate = today.toISOString().split('T')[0];
+    this.minDateCheckOut = checkOutMinDate.toISOString().split('T')[0];
+
     this.roomService.getRooms().subscribe(
       (response) => {
         this.data = response;
         this.hotel = this.data.find((room) => room._id === id);
-        
+
         if (this.hotel && Array.isArray(this.hotel.images)) {
           if (this.hotel.images.length > 0) {
             this.selectedImage = this.hotel.images[0];
@@ -58,6 +67,7 @@ export class HotelDetailsComponent implements OnInit {
           this.hotel.images = [];
           console.warn('Hotel images not found or not an array.');
         }
+        this.updateBookingCalculation();
       },
       (error) => {
         console.error('Error fetching rooms:', error);
@@ -66,9 +76,6 @@ export class HotelDetailsComponent implements OnInit {
     );
 
     this.getFeedback(id!);
-
-    const today = new Date();
-    this.minDate = today.toISOString().split('T')[0];
   }
 
   bookNow(): void {
@@ -88,12 +95,13 @@ export class HotelDetailsComponent implements OnInit {
       name: this.hotel.hotelName || '',
       address: this.hotel.streetAddress || '',
       pricePerNight: this.hotel.pricePerNight || 0,
+      totalAmount: this.bookingSummary.total_amount
     };
 
     this.bookings.bookRoom(bookingDetails).subscribe({
       next: (response) => {
         console.log('Booking Successful:', response);
-        this.bookingData.push(response);
+        this.bookingData = response;
         this.router.navigate(['/bookings']);
       },
       error: (error) => {
@@ -117,16 +125,46 @@ export class HotelDetailsComponent implements OnInit {
         console.log('Feedback submitted successfully:', response);
         this.comment = '';
         this.getFeedback(id!);
-      }, 
+      },
       error: () => {
         console.log('Error submitting feedback.');
-      }
-    })
+      },
+    });
   }
 
   getFeedback(hotelId: string): void {
     this.bookings.getFeedback(hotelId).subscribe((data) => {
       this.feedbackData = data;
+    });
+  }
+
+  updateBookingCalculation(): void {
+    if (
+      !this.hotel ||
+      !this.hotel.roomType ||
+      !this.check_in ||
+      !this.check_out ||
+      this.guest_count < 1
+    ) {
+      this.bookingSummary = null;
+      return;
+    }
+
+    this.bookingData = {
+      roomType: this.hotel.roomType,
+      guest_count: this.guest_count,
+      check_in: this.check_in,
+      check_out: this.check_out,
+    };
+
+    this.bookings.calculateBooking(this.bookingData).subscribe({
+      next: (response) => {
+        this.bookingSummary = response;
+      },
+      error: (error) => {
+        console.error('Error calculating error: ', error);
+        this.bookingSummary = null;
+      },
     });
   }
 }
