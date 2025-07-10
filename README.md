@@ -18,6 +18,13 @@ EasyStay is a feature-rich hotel booking web application developed with Angular,
 
 ---
 
+## 🔗 Live Demo
+
+🌐 **Deployed Hotel Booking App Link**: [Click here to open](https://easystay-snowy.vercel.app/)  
+
+---
+
+
 ## 🌟 Key Features
 
 ### 👤 User-Side Functionalities
