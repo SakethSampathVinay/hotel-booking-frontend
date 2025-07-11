@@ -1,6 +1,6 @@
 # 🌐 EasyStay – User Frontend
 
-The **User Frontend** is the main interface of the EasyStay platform, where users can explore hotels, view details, make bookings, and manage their accounts. Built using Angular, it offers a smooth and secure booking experience with JWT-based authentication.
+The **User Frontend** is the main interface of the EasyStay platform, allowing users to explore hotels, view details, make secure bookings, and manage their account. Built with Angular, it ensures a smooth, responsive experience powered by a Flask backend.
 
 🔗 **Live App**: [https://easystay-snowy.vercel.app/](https://easystay-snowy.vercel.app/)
 
@@ -16,32 +16,32 @@ The **User Frontend** is the main interface of the EasyStay platform, where user
 
 ## 📌 Description
 
-This Angular-based frontend is part of the EasyStay full-stack hotel booking system. It allows users to register, log in, browse hotels, view hotel details, make bookings, and manage them. The frontend communicates with a Flask backend secured via JWT tokens.
+This Angular-based frontend is part of the **EasyStay Full-Stack Hotel Booking Platform**. Users can register, log in, browse hotel listings, view details, make bookings, and access advanced features like chatbot assistance, online payments, and booking confirmations.
 
 ---
 
-## 🎯 Key Features
+## 🎯 Application Features
 
-- 🏨 **Browse Hotels**  
-  Users can browse hotel listings with room type, price, images, and amenities.
+### ✅ Common Features
 
-- 🔍 **Hotel Details Page**  
-  View full details of each hotel including multiple images and included amenities.
+1. 🔐 **User Authentication** – Signup and login with form validation and JWT-based access.
+2. 🏨 **Hotel Listing** – Browse all available hotels with thumbnails, names, and prices.
+3. 📝 **Hotel Details Page** – View in-depth details like amenities, images, room types, and prices.
+4. 📅 **Hotel Booking** – Book rooms with check-in/out dates, guest count, and room selection.
+5. 📂 **User Booking History** – View all past bookings from the user dashboard.
+6. ❌ **Cancel Booking** – Cancel any upcoming reservation with one click.
+7. 📱 **Responsive Design** – Works smoothly across desktop, tablet, and mobile devices.
+8. 👤 **Profile Dashboard** – Central place to manage user bookings and account info.
 
-- 📅 **Room Booking**  
-  Select check-in/check-out dates, guest count, and book the room securely.
+---
 
-- 🔐 **Signup & Login**  
-  Fully validated template-driven forms. JWT token saved on successful login.
+### 🚀 Advanced Features
 
-- 👤 **User Dashboard**  
-  View all your bookings, guest info, and total price in a clean UI.
-
-- ❌ **Cancel Booking**  
-  Cancel an existing booking easily with a single click.
-
-- 🖼 **Responsive UI**  
-  Built with modern responsive design suitable for both desktop and mobile.
+1. 🤖 **AI Chatbot Integration** – Smart hotel assistant powered by NLP (Gemini API).
+2. 🛠 **Admin Dashboard** – Separate panel to manage hotel listings (Angular-based).
+3. 💳 **Online Payment Integration** – Razorpay-powered payment flow for bookings.
+4. 📧 **Booking Confirmation Email** – Email sent after successful payment.
+5. 💬 **Real-time User Feedback** – Feedback system for reviewing the stay experience.
 
 ---
 
@@ -54,6 +54,9 @@ This Angular-based frontend is part of the EasyStay full-stack hotel booking sys
 | Auth         | JWT-based          |
 | Database     | MongoDB            |
 | Image Upload | Cloudinary         |
+| Payments     | Razorpay           |
+| Chatbot API  | Gemini AI          |
+| Email        | Brevo (Sendinblue) |
 | Deployment   | Vercel             |
 
 ---
