@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-signup',
   imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
   name: string = '';

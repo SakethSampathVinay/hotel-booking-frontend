@@ -1,32 +1,45 @@
 <div class="signup-container">
   <h2 class="signup-title">Sign Up</h2>
 
-  <form (ngSubmit)="onSignup()" class="signup-form">
+  <form #signupForm="ngForm" (ngSubmit)="onSignup()" class="signup-form">
     <div class="form-group">
       <label for="name" class="form-label">Name</label>
-      <input type="text" id="name" name="name" [(ngModel)]="name" required placeholder="Enter your name"
-        class="form-input" />
+      <input type="text" id="name" name="name" [(ngModel)]="name" #nameRef="ngModel" required
+        placeholder="Enter your name" class="form-input" />
+      <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched || signupForm.submitted)" class="error-msg">Name
+        is required</div>
     </div>
 
     <div class="form-group">
       <label for="email" class="form-label">Email</label>
-      <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="Enter your email"
-        class="form-input" />
+      <input type="email" id="email" name="email" [(ngModel)]="email" #emailRef="ngModel" required
+        placeholder="Enter your email" class="form-input" />
+      <div *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || signupForm.submitted)" class="error-msg">
+        Email is required
+      </div>
     </div>
 
     <div class="form-group">
       <label for="phone" class="form-label">Phone Number</label>
-      <input type="text" id="phone" name="phone" [(ngModel)]="phone" required placeholder="Enter your Phone Number"
-        class="form-input" />
+      <input type="text" id="phone" name="phone" [(ngModel)]="phone" #phoneRef="ngModel" required
+        placeholder="Enter your Phone Number" class="form-input" pattern="^[0-9]{10}$" />
+      <div *ngIf="phoneRef.invalid && (phoneRef.dirty || phoneRef.touched || signupForm.submitted)" class="error-msg">
+        Phone is required
+      </div>
+      <div *ngIf="phoneRef.errors?.['pattern']" class="error-msg">Phone must be 10 digits</div>
     </div>
 
     <div class="form-group">
       <label for="password" class="form-label">Password</label>
-      <input type="password" id="password" name="password" [(ngModel)]="password" required
-        placeholder="Enter your password" class="form-input" />
+      <input type="password" id="password" name="password" [(ngModel)]="password" #passwordRef="ngModel" required
+        placeholder="Enter your password" class="form-input" minlength="6" />
+      <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || signupForm.submitted)"
+        class="error-msg">Password is
+        required</div>
+      <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">Password must be at least 6 characters</div>
     </div>
 
-    <button type="submit" class="signup-button">Sign Up</button>
+    <button type="submit" class="signup-button" [disabled]="signupForm.invalid">Sign Up</button>
   </form>
 
   <p class="login-redirect">

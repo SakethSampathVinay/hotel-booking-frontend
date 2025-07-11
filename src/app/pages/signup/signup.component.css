@@ -80,3 +80,8 @@
 .login-anchor:hover {
   text-decoration: underline;
 }
+
+.error-msg {
+  font-weight: 500;
+  color: red;
+}
