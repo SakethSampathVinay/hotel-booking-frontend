@@ -142,6 +142,7 @@ export class HotelDetailsComponent implements OnInit {
 
   updateBookingCalculation(): void {
     if (
+      !this.hotel._id || 
       !this.hotel ||
       !this.hotel.roomType ||
       !this.check_in ||
