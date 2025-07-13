@@ -78,7 +78,6 @@ export class HotelDetailsComponent implements OnInit {
   }
 
   bookNow(): void {
-    const id = this.route.snapshot.paramMap.get('id');
 
     if (!this.check_in || !this.check_out || this.guest_count < 1) {
       alert('Please fill in all fields correctly.');
@@ -86,7 +85,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     const bookingDetails = {
-      room_id: this.hotel._id,
+      room_id: this.hotel._id,             
       guest_count: this.guest_count || 0,
       check_in: this.check_in,
       check_out: this.check_out,
