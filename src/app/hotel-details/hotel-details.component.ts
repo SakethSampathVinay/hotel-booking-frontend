@@ -8,7 +8,6 @@ import { roomCommonData } from '../../assets/assets';
 
 @Component({
   selector: 'app-hotel-details',
-  standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './hotel-details.component.html',
   styleUrl: './hotel-details.component.css',
@@ -87,7 +86,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     const bookingDetails = {
-      roomId: this.hotel._id,
+      room_id: this.hotel._id,
       guest_count: this.guest_count || 0,
       check_in: this.check_in,
       check_out: this.check_out,
@@ -154,7 +153,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     this.bookingData = {
-      roomId: this.hotel._id,
+      room_id: this.hotel._id,
       roomType: this.hotel.roomType,
       guest_count: this.guest_count,
       check_in: this.check_in,
