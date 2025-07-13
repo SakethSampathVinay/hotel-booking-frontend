@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
 import { roomCommonData } from '../../assets/assets';
-import { response } from 'express';
+
 @Component({
   selector: 'app-hotel-details',
   standalone: true,
@@ -32,7 +32,7 @@ export class HotelDetailsComponent implements OnInit {
   bookingSummary: any = null;
 
   minDate: string = '';
-  minDateCheckOut: string = ''
+  minDateCheckOut: string = '';
 
   constructor(
     private roomService: RoomService,
@@ -87,7 +87,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     const bookingDetails = {
-      room_id: id,
+      roomId: this.hotel._id,
       guest_count: this.guest_count || 0,
       check_in: this.check_in,
       check_out: this.check_out,
@@ -95,8 +95,10 @@ export class HotelDetailsComponent implements OnInit {
       name: this.hotel.hotelName || '',
       address: this.hotel.streetAddress || '',
       pricePerNight: this.hotel.pricePerNight || 0,
-      totalAmount: this.bookingSummary.total_amount
+      totalAmount: this.bookingSummary.total_amount,
     };
+
+    console.log(bookingDetails);
 
     this.bookings.bookRoom(bookingDetails).subscribe({
       next: (response) => {
@@ -151,6 +153,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     this.bookingData = {
+      roomId: this.hotel._id,
       roomType: this.hotel.roomType,
       guest_count: this.guest_count,
       check_in: this.check_in,
