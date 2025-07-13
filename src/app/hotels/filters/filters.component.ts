@@ -15,8 +15,8 @@ export class FiltersComponent {
 
   @Output() filteredRoomsChange = new EventEmitter<any[]>();
 
-  popularFilters = ['Single Bed', 'Double Bed', 'Luxury Room', 'Family Suite'];
-  priceRange = ['₹0 to 500', '₹500 to 1000', '₹1000 to 2000', '₹2000 to 3000'];
+  popularFilters = ['Single Bed', 'Double Bed', 'Suite'];
+  priceRange = ['₹1000 to 2000', '₹2000 to 5000', '₹5000 to 10000', '₹10000 to 20000'];
   sortBy = ['Price Low to High', 'Price High to Low', 'Newest First'];
 
   selectedRoomTypes: string[] = [];
@@ -31,7 +31,7 @@ export class FiltersComponent {
     this.roomService.getRooms().subscribe({
       next: (response) => {
         this.rooms = response;
-        this.emitFilteredRooms(); // Emit initial filtered rooms
+        this.emitFilteredRooms();
       },
       error: (error) => {
         console.error('Error fetching rooms:', error);
@@ -95,7 +95,7 @@ export class FiltersComponent {
 
   isPriceInSelectedRange(price: number): boolean {
     for (const range of this.selectedPriceRanges) {
-      const [min, max] = range.replace(/\$/g, '').split(' to ').map(Number);
+      const [min, max] = range.replace(/\₹/g, '').split(' to ').map(Number);
       if (price >= min && price <= max) return true;
     }
     return false;

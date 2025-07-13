@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com/auth';
-  // https://hotel-booking-backend-74ai.onrender.com/auth
-  // http://127.0.0.1:5000/auth
+  private apiUrl = environment.backendUrl
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.http.post(`${this.apiUrl}/login`, body);
+    return this.http.post(`${this.apiUrl}/auth/login`, body);
   }
 
   signup(
@@ -23,7 +22,7 @@ export class LoginService {
     password: string
   ): Observable<any> {
     const body = { name, email, phone, password };
-    return this.http.post(`${this.apiUrl}/signup`, body);
+    return this.http.post(`${this.apiUrl}/auth/signup`, body);
   }
 
   logout(): void {

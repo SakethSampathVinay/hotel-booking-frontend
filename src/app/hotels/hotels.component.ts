@@ -6,7 +6,6 @@ import { FiltersComponent } from './filters/filters.component';
 
 @Component({
   selector: 'app-hotels',
-  standalone: true,
   imports: [NgFor, CommonModule, FiltersComponent, RouterModule],
   templateUrl: './hotels.component.html',
   styleUrl: './hotels.component.css',

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 declare var Razorpay: any;
 
@@ -8,9 +9,7 @@ declare var Razorpay: any;
   providedIn: 'root',
 })
 export class BookingsService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com/';
-  //  https://hotel-booking-backend-74ai.onrender.com/
-  // http://127.0.0.1:5000/
+  private apiUrl = environment.backendUrl
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -21,17 +20,17 @@ export class BookingsService {
   }
 
   bookRoom(data: any): Observable<any> {
-    const url = `${this.apiUrl}book-room`;
+    const url = `${this.apiUrl}/book-room`;
     return this.http.post(url, data, { headers: this.getAuthHeaders() });
   }
 
   getBooking(): Observable<any> {
-    const url = `${this.apiUrl}get-bookings`;
+    const url = `${this.apiUrl}/get-bookings`;
     return this.http.get(url, { headers: this.getAuthHeaders() });
   }
 
   updateBookingPaid(bookingId: string): Observable<any> {
-    const url = `${this.apiUrl}update-pay`;
+    const url = `${this.apiUrl}/update-pay`;
     const body = {
       booking_id: bookingId,
       status: 'Paid',
@@ -43,7 +42,7 @@ export class BookingsService {
   }
 
   cancelBooking(bookingId: string): Observable<any> {
-    const url = `${this.apiUrl}cancel-booking/${bookingId}`;
+    const url = `${this.apiUrl}/cancel-booking/${bookingId}`;
     return this.http.delete(url, { headers: this.getAuthHeaders() });
   }
 
@@ -53,7 +52,7 @@ export class BookingsService {
     roomId: string,
     bookingId: string
   ): void {
-    const url = `${this.apiUrl}api/create-order`;
+    const url = `${this.apiUrl}/api/create-order`;
     const headers = this.getAuthHeaders();
 
     this.http
@@ -102,7 +101,7 @@ export class BookingsService {
     };
 
     this.http
-      .post(`${this.apiUrl}api/confirm-booking`, bookingData, {
+      .post(`${this.apiUrl}/api/confirm-booking`, bookingData, {
         headers: this.getAuthHeaders(),
       })
       .subscribe({
@@ -118,17 +117,17 @@ export class BookingsService {
   }
 
   postFeedback(data: any): Observable<any> {
-    const url = `${this.apiUrl}add-feedback`;
+    const url = `${this.apiUrl}/add-feedback`;
     return this.http.post(url, data, { headers: this.getAuthHeaders() });
   }
 
   getFeedback(hotelId: string): Observable<any> {
-    const url = `${this.apiUrl}get-feedback/${hotelId}`;
+    const url = `${this.apiUrl}/get-feedback/${hotelId}`;
     return this.http.get(url, { headers: this.getAuthHeaders() });
   }
 
   calculateBooking(bookingData: string): Observable<any> {
-    const url = `${this.apiUrl}calculate-booking`;
+    const url = `${this.apiUrl}/calculate-booking`;
     return this.http.post(url, bookingData, { headers: this.getAuthHeaders() });
   }
 }

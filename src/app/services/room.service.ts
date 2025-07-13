@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com';
-  //  https://hotel-booking-backend-74ai.onrender.com
-  // http://127.0.0.1:5000
-
+  private apiUrl = environment.backendUrl
   constructor(private http: HttpClient) {}
 
   getRooms(): Observable<any> {

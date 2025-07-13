@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  private apiUrl = 'https://hotel-booking-backend-74ai.onrender.com';
-    //  https://hotel-booking-backend-74ai.onrender.com
-  // http://127.0.0.1:5000
+  private apiUrl = environment.backendUrl
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +33,7 @@ export class ProfileService {
 
   deleteProfile(): Observable<any> {
     const headers = {
-      Authorization: `Bearer ${localStorage.getItem('token')}`, // Or use cookies if configured
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
     return this.http.delete(`${this.apiUrl}/delete-profile`, {
