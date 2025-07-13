@@ -14,18 +14,37 @@ import { RenderMode } from '@angular/ssr';
 import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [loginSignupGuard] },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then((c) => c.LoginComponent),
+    canActivate: [loginSignupGuard],
+  },
   {
     path: 'signup',
-    component: SignupComponent,
+    loadComponent: () =>
+      import('./pages/signup/signup.component').then((c) => c.SignupComponent),
     canActivate: [loginSignupGuard],
   },
 
-  { path: '', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'rooms', component: HotelsComponent, canActivate: [authGuard] },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./home/home.component').then((c) => c.HomeComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'rooms',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./hotels/hotels.component').then((c) => c.HotelsComponent),
+  },
   {
     path: 'rooms/:id',
-    component: HotelDetailsComponent,
+    loadComponent: () =>
+      import('./hotel-details/hotel-details.component').then(
+        (c) => c.HotelDetailsComponent
+      ),
     canActivate: [authGuard],
     data: {
       renderMode: 'default',
@@ -33,16 +52,32 @@ export const routes: Routes = [
   },
   {
     path: 'bookings',
-    component: HotelBookingsComponent,
+    loadComponent: () =>
+      import('./hotel-bookings/hotel-bookings.component').then(
+        (c) => c.HotelBookingsComponent
+      ),
     canActivate: [authGuard],
   },
   {
     path: 'experience',
-    component: ExperiencesComponent,
+    loadComponent: () =>
+      import('./experiences/experiences.component').then(
+        (c) => c.ExperiencesComponent
+      ),
     canActivate: [authGuard],
   },
-  { path: 'about', component: AboutComponent, canActivate: [authGuard] },
-  { path: "profile", component: ProfileComponent, canActivate: [authGuard]},
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./about/about.component').then((c) => c.AboutComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./profile/profile.component').then((c) => c.ProfileComponent),
+    canActivate: [authGuard],
+  },
 
   { path: '**', component: PageNotFoundComponent },
 ];
