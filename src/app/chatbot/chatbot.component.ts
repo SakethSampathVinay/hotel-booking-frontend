@@ -16,10 +16,11 @@ export class ChatbotComponent {
 
   constructor(private http: HttpClient) {}
 
-  // http://127.0.0.1:5000/
+  // http://127.0.0.1:5000/chat
   // https://hotel-booking-backend-74ai.onrender.com/chat
 
   sendMessage(): void {
+    const token = localStorage.getItem('token')
     const message = this.userInput.trim();
     if (!message) return;
 
@@ -30,6 +31,10 @@ export class ChatbotComponent {
     this.http
       .post<any>('https://hotel-booking-backend-74ai.onrender.com/chat', {
         message,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
       .subscribe({
         next: (response) => {
