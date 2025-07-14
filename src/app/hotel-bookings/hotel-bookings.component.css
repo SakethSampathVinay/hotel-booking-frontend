@@ -1,4 +1,3 @@
-/* Container padding like Tailwind: py-28 px-4 md:px-16 lg:px-24 xl:px-32 */
 .bookings-container {
   padding: 7rem 1rem;
   max-width: 1280px;
@@ -23,7 +22,6 @@
   max-width: 600px;
 }
 
-/* Flex header like md:flex */
 .table-header {
   display: none;
   justify-content: space-around;
@@ -47,7 +45,6 @@
   }
 }
 
-/* Booking Card Flex Layout */
 .booking-card {
   display: flex;
   flex-direction: column;
@@ -65,7 +62,6 @@
   }
 }
 
-/* Hotel Info Section */
 .hotel-info {
   display: flex;
   gap: 1rem;
@@ -98,7 +94,6 @@
   margin-bottom: 0.25rem;
 }
 
-/* Dates and Payment container - row for all, equal width on md+ */
 .data-payment-container {
   display: flex;
   flex-direction: row;
@@ -107,7 +102,6 @@
   margin-top: 1rem;
 }
 
-/* Small screen: natural width */
 .checkin-info,
 .checkout-info,
 .payment-status {
@@ -116,7 +110,6 @@
   gap: 0.25rem;
 }
 
-/* Medium and up: equal widths */
 @media (min-width: 768px) {
   .data-payment-container {
     gap: 2rem;
@@ -130,7 +123,6 @@
   }
 }
 
-/* Date label styling */
 .date-label {
   font-size: 0.875rem;
   font-weight: 600;
@@ -141,20 +133,19 @@
   font-size: 0.875rem;
 }
 
-/* Payment Status */
 .payment-status {
   gap: 0.5rem;
 }
 
 .payment-text {
   font-size: 0.875rem;
-  color: #10b981; /* green-500 */
+  color: #10b981;
   font-weight: 500;
 }
 
 .payment-failure {
   font-size: 0.875rem;
-  color: #ef4444; /* red-500 */
+  color: #ef4444;
 }
 
 .payment-success {

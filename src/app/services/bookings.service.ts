@@ -35,7 +35,6 @@ export class BookingsService {
       booking_id: bookingId,
       status: 'Paid',
     };
-    console.log('📦 Sending body:', body);
     return this.http.put(url, body, {
       headers: this.getAuthHeaders(),
     });
@@ -65,7 +64,6 @@ export class BookingsService {
           name: name,
           order_id: order.id,
           handler: (response: any) => {
-            console.log('Payment Success: ', response);
             this.confirmBooking(response, amount, roomId, bookingId);
           },
           prefill: {
@@ -107,7 +105,6 @@ export class BookingsService {
       .subscribe({
         next: (res) => {
           alert('🎉 Booking confirmed!');
-          console.log('🧾 Booking confirmed:', res);
         },
         error: (err) => {
           alert('❌ Booking failed');

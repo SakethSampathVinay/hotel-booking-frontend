@@ -2,7 +2,6 @@
   position: relative;
 }
 
-/* Toggle Button - visible only on mobile */
 .filters-toggle-btn {
   display: flex;
   align-items: center;
@@ -16,12 +15,10 @@
   border-radius: 4px;
 }
 
-/* Desktop sidebar */
 .filters-sidebar.desktop {
   display: none;
 }
 
-/* Mobile drawer styles */
 .filters-sidebar.mobile {
   position: fixed;
   top: 0;
@@ -53,7 +50,6 @@
   cursor: pointer;
 }
 
-/* Backdrop */
 .filters-backdrop {
   position: fixed;
   top: 0;
@@ -64,7 +60,6 @@
   z-index: 999;
 }
 
-/* Common filter section styling */
 .filters-section {
   margin-bottom: 24px;
 }
@@ -81,7 +76,6 @@
   font-size: 14px;
 }
 
-/* Clear Button */
 .filters-clear-button {
   background-color: #000;
   color: #fff;
@@ -100,15 +94,15 @@
 
   .filters-sidebar.desktop {
     display: block;
-    position: sticky; /* Fixed to viewport */
-    top: 100px; /* Space from top (adjust as needed) */
+    position: sticky;
+    top: 100px;
     right: 32px;
     width: 250px;
     background: #fff;
     padding: 20px;
     border: 1px solid #ddd;
     height: fit-content;
-    max-height: calc(100vh - 120px); /* Prevent overflow if content is long */
+    max-height: calc(100vh - 120px);
     overflow-y: auto;
     margin-top: 150px;
   }

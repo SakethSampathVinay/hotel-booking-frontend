@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 5rem 1.5rem;
-  background-color: #f8fafc; /* Tailwind bg-slate-50 */
+  background-color: #f8fafc;
 }
 
 .featured-heading {
@@ -23,7 +23,7 @@
 .featured-description {
   max-width: 720px;
   font-size: 1rem;
-  color: #4b5563; /* text-gray-600 */
+  color: #4b5563;
   text-align: center;
   line-height: 1.6;
 }
@@ -65,7 +65,7 @@
 
 .featured-address {
   font-size: 0.875rem;
-  color: #6b7280; /* Tailwind text-gray-500 */
+  color: #6b7280;
 }
 
 .featured-price-container {

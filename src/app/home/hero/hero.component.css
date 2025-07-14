@@ -14,7 +14,7 @@
 }
 
 .ultimate-hotel-experience {
-  background-color: rgba(73, 185, 255, 0.5); /* #49B9FF/50 */
+  background-color: rgba(73, 185, 255, 0.5);
   padding: 0.25rem 0.875rem;
   border-radius: 9999px;
   margin-top: 5rem;
@@ -52,7 +52,7 @@
 
 .input-container {
   background-color: white;
-  color: #6b7280; /* Tailwind text-gray-500 */
+  color: #6b7280;
   border-radius: 0.5rem;
   padding: 1rem 1.5rem;
   margin-top: 2rem;
@@ -118,7 +118,7 @@
   margin-top: 24px;
   display: flex;
   gap: 20px;
-  font-size: 15px;
+  font-size: 18px;
   color: white;
   flex-wrap: wrap;
 }

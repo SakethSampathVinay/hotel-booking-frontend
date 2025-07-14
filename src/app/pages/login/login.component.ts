@@ -21,7 +21,6 @@ export class LoginComponent {
   onLogin(): void {
     this.loginService.login(this.email, this.password).subscribe({
       next: (response) => {
-        console.log('Login Successfully', response);
         localStorage.setItem('token', response.token);
         this.router.navigate(['/']);
       },

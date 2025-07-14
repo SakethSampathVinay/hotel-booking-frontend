@@ -100,7 +100,6 @@ export class HotelDetailsComponent implements OnInit {
 
     this.bookings.bookRoom(bookingDetails).subscribe({
       next: (response) => {
-        console.log('Booking Successful:', response);
         this.bookingData = response;
         this.router.navigate(['/bookings']);
       },
@@ -122,7 +121,6 @@ export class HotelDetailsComponent implements OnInit {
 
     this.bookings.postFeedback(payload).subscribe({
       next: (response) => {
-        console.log('Feedback submitted successfully:', response);
         this.comment = '';
         this.getFeedback(id!);
       },

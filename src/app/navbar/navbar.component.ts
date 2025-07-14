@@ -22,7 +22,6 @@ export class NavbarComponent {
   }
 
   logout(): void {
-    console.log('Logging out...');
     this.router.navigate(['/signup']);
     localStorage.removeItem('token');
   }

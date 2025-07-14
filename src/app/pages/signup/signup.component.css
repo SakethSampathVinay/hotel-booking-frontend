@@ -30,7 +30,7 @@
 
 .form-label {
   font-size: 0.95rem;
-  color: #374151; /* Gray-700 */
+  color: #374151;
 }
 
 .form-input {
@@ -43,7 +43,7 @@
 }
 
 .form-input:focus {
-  border-color: #6366f1; /* Indigo-500 */
+  border-color: #6366f1;
 }
 
 .signup-button {

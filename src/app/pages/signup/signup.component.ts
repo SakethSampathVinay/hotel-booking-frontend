@@ -24,7 +24,6 @@ export class SignupComponent {
       .signup(this.name, this.email, this.phone, this.password)
       .subscribe({
         next: (response) => {
-          console.log('Signup Successfully', response);
           this.message = 'Signup successful! Please log in.';
           localStorage.setItem('token', response.token);
           this.router.navigate(['/login']);

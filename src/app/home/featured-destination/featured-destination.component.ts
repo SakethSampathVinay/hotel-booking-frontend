@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { assets } from '../../../assets/assets';
 import { RouterLink, RouterModule } from '@angular/router';
-import { roomsDummyData } from '../../../assets/assets';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
 import { RoomService } from '../../services/room.service';
-import { rmSync } from 'fs';
 
 @Component({
   selector: 'app-featured-destination',

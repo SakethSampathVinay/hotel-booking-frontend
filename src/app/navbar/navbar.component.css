@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +7,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* Navbar Container */
 .navbar-container {
   position: fixed;
   top: 0;
@@ -18,26 +16,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.8); /* Tailwind: bg-white/80 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Tailwind: shadow-md */
-  backdrop-filter: blur(10px); /* Tailwind: backdrop-blur-lg */
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
   z-index: 999;
 }
 
-/* Logo */
 .navbar-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1f2937; /* Tailwind: text-gray-700 */
+  color: #1f2937;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Links */
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 2rem; /* Tailwind: gap-8 */
+  gap: 2rem;
 }
 .navbar-li {
   font-size: 1rem;
@@ -61,23 +57,21 @@ body {
   width: 100%;
 }
 
-/* Button */
 .navbar-button {
   padding: 8px 20px;
-  border-radius: 9999px; /* Tailwind: rounded-full */
+  border-radius: 9999px;
   border: 1px solid #1f2937;
   background-color: transparent;
-  font-size: 0.875rem; /* Tailwind: text-sm */
-  font-weight: 300; /* Tailwind: font-light */
+  font-size: 0.875rem;
+  font-weight: 300;
   color: #1f2937;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .navbar-button:hover {
-  background-color: #f3f4f6; /* Tailwind: hover:bg-gray-100 */
+  background-color: #f3f4f6;
 }
 
-/* Hamburger Icon */
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -91,7 +85,6 @@ body {
   background-color: #1f2937;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
@@ -101,7 +94,6 @@ body {
   }
 }
 
-/* Mobile Menu Styles */
 .mobile-menu {
   position: fixed;
   top: 0;
