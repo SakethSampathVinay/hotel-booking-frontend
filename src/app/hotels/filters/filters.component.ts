@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { roomsDummyData } from '../../../assets/assets';
 import { RoomService } from '../../services/room.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -26,9 +27,10 @@ export class FiltersComponent {
   rooms: any[] = [];
 
   constructor(private roomService: RoomService) {}
+  private RoomServiceSubscription!: Subscription;
 
   ngOnInit() {
-    this.roomService.getRooms().subscribe({
+    this.RoomServiceSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
         this.rooms = response;
         this.emitFilteredRooms();
@@ -103,5 +105,11 @@ export class FiltersComponent {
 
   toggleMobileFilters() {
     this.showMobileFilters = !this.showMobileFilters;
+  }
+
+  ngOnDestroy() {
+    if(this.RoomServiceSubscription) {
+      this.RoomServiceSubscription.unsubscribe();
+    }
   }
 }

@@ -1,7 +1,8 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, RESPONSE_INIT } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BookingsService } from '../services/bookings.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hotel-bookings',
@@ -15,10 +16,11 @@ export class HotelBookingsComponent {
   bookingsData: any[] = [];
 
   constructor(private bookingService: BookingsService) {}
+  private bookingSubscription! : Subscription;
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.bookingService.getBooking().subscribe({
+    this.bookingSubscription = this.bookingService.getBooking().subscribe({
       next: (response) => {
         return (this.bookingsData = response.bookings);
       },
@@ -30,7 +32,7 @@ export class HotelBookingsComponent {
   }
 
   isPaidfn(booking: any) {
-    this.bookingService.updateBookingPaid(booking._id).subscribe({
+    this.bookingSubscription = this.bookingService.updateBookingPaid(booking._id).subscribe({
       next: (res) => {
         booking.status = 'Paid';
       },
@@ -50,8 +52,14 @@ export class HotelBookingsComponent {
   }
 
   cancelBooking(id: string): void {
-    this.bookingService.cancelBooking(id).subscribe((data: any) => {
+    this.bookingSubscription = this.bookingService.cancelBooking(id).subscribe((data: any) => {
       console.log('Successfully Cancelled the Booking');
     });
+  }
+
+  ngOnDestroy(): void {
+    if(this.bookingSubscription) {
+      this.bookingSubscription.unsubscribe();
+    }
   }
 }

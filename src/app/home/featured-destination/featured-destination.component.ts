@@ -4,6 +4,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
 import { RoomService } from '../../services/room.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-featured-destination',
@@ -14,10 +15,12 @@ import { RoomService } from '../../services/room.service';
 export class FeaturedDestinationComponent {
   constructor(private roomService: RoomService) {}
 
+  private roomSubscription!: Subscription;
+
   rooms: any[] = [];
 
   ngOnInit() {
-    this.roomService.getRooms().subscribe({
+    this.roomSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
         this.rooms = response.map((room: any) => {
           return room;
@@ -28,5 +31,11 @@ export class FeaturedDestinationComponent {
         this.rooms = [];
       },
     });
+  }
+
+  ngOnDestroy() {
+    if(this.roomSubscription) {
+      this.roomSubscription.unsubscribe();
+    }
   }
 }

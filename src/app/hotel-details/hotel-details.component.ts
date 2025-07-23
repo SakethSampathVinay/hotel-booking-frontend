@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
 import { roomCommonData } from '../../assets/assets';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hotel-details',
@@ -40,6 +41,8 @@ export class HotelDetailsComponent implements OnInit {
     private router: Router
   ) {}
 
+  private subscriptions: Subscription = new Subscription();
+
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -51,7 +54,7 @@ export class HotelDetailsComponent implements OnInit {
     this.minDate = today.toISOString().split('T')[0];
     this.minDateCheckOut = checkOutMinDate.toISOString().split('T')[0];
 
-    this.roomService.getRooms().subscribe(
+    this.subscriptions.add(this.roomService.getRooms().subscribe(
       (response) => {
         this.data = response;
         this.hotel = this.data.find((room) => room._id === id);
@@ -72,7 +75,7 @@ export class HotelDetailsComponent implements OnInit {
         console.error('Error fetching rooms:', error);
         this.data = [];
       }
-    );
+    ));
 
     this.getFeedback(id!);
   }
@@ -98,7 +101,7 @@ export class HotelDetailsComponent implements OnInit {
 
     console.log(bookingDetails);
 
-    this.bookings.bookRoom(bookingDetails).subscribe({
+    this.subscriptions.add(this.bookings.bookRoom(bookingDetails).subscribe({
       next: (response) => {
         this.bookingData = response;
         this.router.navigate(['/bookings']);
@@ -107,7 +110,7 @@ export class HotelDetailsComponent implements OnInit {
         console.error('Error booking room:', error);
         alert('Error booking room. Please try again later.');
       },
-    });
+    }));
   }
 
   submitFeedback(): void {
@@ -119,7 +122,7 @@ export class HotelDetailsComponent implements OnInit {
       comment: this.comment,
     };
 
-    this.bookings.postFeedback(payload).subscribe({
+    this.subscriptions.add(this.bookings.postFeedback(payload).subscribe({
       next: (response) => {
         this.comment = '';
         this.getFeedback(id!);
@@ -127,13 +130,13 @@ export class HotelDetailsComponent implements OnInit {
       error: () => {
         console.log('Error submitting feedback.');
       },
-    });
+    }));
   }
 
   getFeedback(hotelId: string): void {
-    this.bookings.getFeedback(hotelId).subscribe((data) => {
+    this.subscriptions.add(this.bookings.getFeedback(hotelId).subscribe((data) => {
       this.feedbackData = data;
-    });
+    }));
   }
 
   updateBookingCalculation(): void {
@@ -157,7 +160,7 @@ export class HotelDetailsComponent implements OnInit {
       check_out: this.check_out,
     };
 
-    this.bookings.calculateBooking(this.bookingData).subscribe({
+    this.subscriptions.add(this.bookings.calculateBooking(this.bookingData).subscribe({
       next: (response) => {
         this.bookingSummary = response;
       },
@@ -165,6 +168,11 @@ export class HotelDetailsComponent implements OnInit {
         console.error('Error calculating error: ', error);
         this.bookingSummary = null;
       },
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+    console.log('HotelDetailsComponent destroyed and subscriptions cleaned up.');
   }
 }

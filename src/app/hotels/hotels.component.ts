@@ -3,6 +3,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { RoomService } from '../services/room.service';
 import { FiltersComponent } from './filters/filters.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hotels',
@@ -14,10 +15,11 @@ export class HotelsComponent implements OnInit {
   filteredRooms: any[] = [];
 
   constructor(private roomService: RoomService) {}
+  private RoomServiceSubscription!: Subscription;
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.roomService.getRooms().subscribe({
+    this.RoomServiceSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
         this.filteredRooms = response;
       },
@@ -34,5 +36,11 @@ export class HotelsComponent implements OnInit {
 
   updateRooms(filteredList: any[]) {
     this.filteredRooms = filteredList;
+  }
+
+  ngOnDestroy(): void {
+    if (this.RoomServiceSubscription) {
+      this.RoomServiceSubscription.unsubscribe();
+    }
   }
 }

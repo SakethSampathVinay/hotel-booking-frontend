@@ -3,6 +3,7 @@ import { ProfileService } from '../services/profile.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -15,15 +16,18 @@ export class ProfileComponent {
   isEditMode: boolean = false;
 
   constructor(private profileService: ProfileService, private router: Router) {}
+  private profileServiceSubscription!: Subscription;
 
   ngOnInit() {
     this.getProfileDetails();
   }
 
   getProfileDetails() {
-    this.profileService.getProfile().subscribe((data) => {
-      this.profileData = data.profileData;
-    });
+    this.profileServiceSubscription = this.profileService
+      .getProfile()
+      .subscribe((data) => {
+        this.profileData = data.profileData;
+      });
   }
 
   enableEditMode() {
@@ -31,19 +35,29 @@ export class ProfileComponent {
   }
 
   updateProfileDetails() {
-    this.profileService.updateProfile(this.profileData).subscribe(() => {
-      this.isEditMode = false;
-    });
+    this.profileServiceSubscription = this.profileService
+      .updateProfile(this.profileData)
+      .subscribe(() => {
+        this.isEditMode = false;
+      });
   }
 
   deleteProfile() {
-    this.profileService.deleteProfile().subscribe(() => {
-      localStorage.removeItem('token')
-      this.router.navigate(['/signup']);
-    });
+    this.profileServiceSubscription = this.profileService
+      .deleteProfile()
+      .subscribe(() => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/signup']);
+      });
   }
 
   logout() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+  }
+
+  ngOnDestroy() {
+    if (this.profileServiceSubscription) {
+      this.profileServiceSubscription.unsubscribe();
+    }
   }
 }
