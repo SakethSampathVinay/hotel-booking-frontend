@@ -50,7 +50,7 @@ export class HotelDetailsComponent implements OnInit {
 
     const today = new Date();
     const checkOutMinDate = new Date(today);
-    checkOutMinDate.setDate(today.getDate() + 1);
+    checkOutMinDate.setDate(today.getDate() + 2);
     this.minDate = today.toISOString().split('T')[0];
     this.minDateCheckOut = checkOutMinDate.toISOString().split('T')[0];
 

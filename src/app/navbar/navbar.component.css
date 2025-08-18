@@ -130,3 +130,8 @@ body {
   border: none;
   cursor: pointer;
 }
+
+.admin-panel {
+  color: black;
+  text-decoration: none;
+}
