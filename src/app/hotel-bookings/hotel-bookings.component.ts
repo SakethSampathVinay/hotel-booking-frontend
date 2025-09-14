@@ -16,12 +16,13 @@ export class HotelBookingsComponent {
   bookingsData: any[] = [];
 
   constructor(private bookingService: BookingsService) {}
-  private bookingSubscription! : Subscription;
+  private bookingSubscription!: Subscription;
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingSubscription = this.bookingService.getBooking().subscribe({
       next: (response) => {
+        console.log(response.bookings);
         return (this.bookingsData = response.bookings);
       },
       error: (error) => {
@@ -32,33 +33,38 @@ export class HotelBookingsComponent {
   }
 
   isPaidfn(booking: any) {
-    this.bookingSubscription = this.bookingService.updateBookingPaid(booking._id).subscribe({
-      next: (res) => {
-        booking.status = 'Paid';
-      },
-      error: (err) => {
-        console.error('Payment update failed:', err);
-      },
-    });
+    this.bookingSubscription = this.bookingService
+      .updateBookingPaid(booking._id)
+      .subscribe({
+        next: (res) => {
+          booking.status = 'Paid';
+        },
+        error: (err) => {
+          console.error('Payment update failed:', err);
+        },
+      });
   }
 
   makePayment(booking: any) {
-    const amount = booking.totalAmount;
+    const amount = booking.total_amount || booking.totalAmount;
     const roomId = booking.room_id || booking.roomId;
-    const bookingId = booking._id;
+    const bookingId = booking._id || booking.id;
     const name = booking.name;
+    const userId = booking.userId || localStorage.getItem('user');
 
-    this.bookingService.makePayment(amount, name, roomId, bookingId);
+    this.bookingService.makePayment(amount, name, roomId, bookingId, userId);
   }
 
   cancelBooking(id: string): void {
-    this.bookingSubscription = this.bookingService.cancelBooking(id).subscribe((data: any) => {
-      console.log('Successfully Cancelled the Booking');
-    });
+    this.bookingSubscription = this.bookingService
+      .cancelBooking(id)
+      .subscribe((data: any) => {
+        console.log('Successfully Cancelled the Booking');
+      });
   }
 
   ngOnDestroy(): void {
-    if(this.bookingSubscription) {
+    if (this.bookingSubscription) {
       this.bookingSubscription.unsubscribe();
     }
   }

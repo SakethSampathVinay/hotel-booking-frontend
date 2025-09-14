@@ -12,24 +12,24 @@
     </h1>
 
     <div class="hotel-rooms-card-container" *ngFor="let room of filteredRooms; trackBy: trackByRoom"
-      [routerLink]="['/rooms', room._id]">
+      [routerLink]="['/rooms', room.id]">
       <div class="hotel-rooms-content-container">
-        <img [src]="room.images[0]" alt="Hotel Room" class="image"/>
+        <img [src]="room.images[0]" alt="Hotel Room" class="image" />
         <div class="hotel-rooms-content-card-container">
           <p class="hotel-rooms-city" *ngIf="room.roomType">
             {{ room.roomType }}
           </p>
           <h2 class="hotel-rooms-name">
-            {{ room.hotelName || "Unnamed Hotel" }}
+            {{ room.hotel_name || "Unnamed Hotel" }}
           </h2>
-          <p class="hotel-rooms-address" *ngIf="room.streetAddress">
-            {{ room.streetAddress }}
+          <p class="hotel-rooms-address" *ngIf="room.street_address">
+            {{ room.street_address }}
           </p>
           <p class="hotel-rooms-amenities">
             Amenities: {{ room.amenities.join(", ") }}
           </p>
           <p class="hotel-rooms-pricepernight">
-            ₹{{ room.pricePerNight }} / night
+            ₹{{ room.price_per_night }} / night
           </p>
         </div>
       </div>

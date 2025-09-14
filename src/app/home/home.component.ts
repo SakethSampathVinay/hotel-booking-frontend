@@ -16,7 +16,6 @@ import { ChatbotComponent } from "../chatbot/chatbot.component";
     ExclusiveOffersComponent,
     TestimonialsComponent,
     StayInspiredComponent,
-    ChatbotComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

@@ -21,7 +21,8 @@ export class HotelsComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.RoomServiceSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
-        this.filteredRooms = response;
+        this.filteredRooms = response.hotels;
+        console.log(response);
       },
       error: (error) => {
         console.error('Error fetching rooms:', error);

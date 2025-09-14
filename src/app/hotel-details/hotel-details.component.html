@@ -1,8 +1,8 @@
 <div class="room-details-container">
   <div class="room-header">
     <h1 class="room-title">
-      {{ hotel?.hotelName }}
-      <span class="room-type">({{ hotel?.roomType }})</span>
+      {{ hotel?.hotel_name }}
+      <span class="room-type">({{ hotel?.room_type }})</span>
     </h1>
     <p class="discount-badge">20% OFF</p>
   </div>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="address-section">
-    <span class="address-text">{{ hotel?.streetAddress }}</span>
+    <span class="address-text">{{ hotel?.street_address }}</span>
   </div>
 
   <div class="room-images">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <p class="price">₹{{ hotel?.pricePerNight }}/night</p>
+    <p class="price">₹{{ hotel?.price_per_night }}/night</p>
   </div>
 
   <form class="booking-form" (ngSubmit)="bookNow()" #bookingForm="ngForm">

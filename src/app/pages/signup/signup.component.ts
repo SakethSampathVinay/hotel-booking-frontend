@@ -26,6 +26,7 @@ export class SignupComponent {
         next: (response) => {
           this.message = 'Signup successful! Please log in.';
           localStorage.setItem('token', response.token);
+          localStorage.setItem('user', response.user);
           this.router.navigate(['/login']);
         },
         error: (error) => {

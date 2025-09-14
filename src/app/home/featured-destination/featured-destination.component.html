@@ -6,17 +6,13 @@
   </p>
 
   <div class="featured-total-container">
-    <div
-      class="featured-card-container"
-      *ngFor="let room of rooms.slice(0, 3)"
-      [routerLink]="['/rooms', room._id]"
-    >
+    <div class="featured-card-container" *ngFor="let room of rooms.slice(0, 3)" [routerLink]="['/rooms', room._id]">
       <img [src]="room.images[0]" alt="Room Image" class="featured-image" />
       <div class="featured-card-content">
-        <h3 class="featured-heading1">{{ room.hotelName }}</h3>
-        <p class="featured-address">{{ room.streetAddress }}</p>
+        <h3 class="featured-heading1">{{ room.hotel_name }}</h3>
+        <p class="featured-address">{{ room.street_address }}</p>
         <div class="featured-price-container">
-          <h3 class="featured-price">₹{{ room.pricePerNight }}/night</h3>
+          <h3 class="featured-price">₹{{ room.price_per_night }}/night</h3>
           <button class="featured-book-now-button">View Details</button>
         </div>
       </div>

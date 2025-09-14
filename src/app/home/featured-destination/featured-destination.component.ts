@@ -22,7 +22,7 @@ export class FeaturedDestinationComponent {
   ngOnInit() {
     this.roomSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
-        this.rooms = response.map((room: any) => {
+        this.rooms = response.hotels.map((room: any) => {
           return room;
         });
       },

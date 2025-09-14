@@ -54,63 +54,66 @@ export class HotelDetailsComponent implements OnInit {
     this.minDate = today.toISOString().split('T')[0];
     this.minDateCheckOut = checkOutMinDate.toISOString().split('T')[0];
 
-    this.subscriptions.add(this.roomService.getRooms().subscribe(
-      (response) => {
-        this.data = response;
-        this.hotel = this.data.find((room) => room._id === id);
+    this.subscriptions.add(
+      this.roomService.getRooms().subscribe(
+        (response) => {
+          this.data = response.hotels;
+          this.hotel = this.data.find((room) => room.id.toString() === id);
 
-        if (this.hotel && Array.isArray(this.hotel.images)) {
-          if (this.hotel.images.length > 0) {
-            this.selectedImage = this.hotel.images[0];
+          if (this.hotel && Array.isArray(this.hotel.images)) {
+            if (this.hotel.images.length > 0) {
+              this.selectedImage = this.hotel.images[0];
+            } else {
+              console.warn('No images available for this hotel.');
+            }
           } else {
-            console.warn('No images available for this hotel.');
+            this.hotel.images = [];
+            console.warn('Hotel images not found or not an array.');
           }
-        } else {
-          this.hotel.images = [];
-          console.warn('Hotel images not found or not an array.');
+          this.updateBookingCalculation();
+        },
+        (error) => {
+          console.error('Error fetching rooms:', error);
+          this.data = [];
         }
-        this.updateBookingCalculation();
-      },
-      (error) => {
-        console.error('Error fetching rooms:', error);
-        this.data = [];
-      }
-    ));
+      )
+    );
 
     this.getFeedback(id!);
   }
 
   bookNow(): void {
-
     if (!this.check_in || !this.check_out || this.guest_count < 1) {
       alert('Please fill in all fields correctly.');
       return;
     }
 
     const bookingDetails = {
-      room_id: this.hotel._id,             
+      room_id: this.hotel.id,
       guest_count: this.guest_count || 0,
       check_in: this.check_in,
       check_out: this.check_out,
       image: this.selectedImage || this.hotel.images?.[0] || '',
-      name: this.hotel.hotelName || '',
-      address: this.hotel.streetAddress || '',
-      pricePerNight: this.hotel.pricePerNight || 0,
+      name: this.hotel.hotel_name || '',
+      address: this.hotel.street_address || '',
+      pricePerNight: this.hotel.price_per_night || 0,
       totalAmount: this.bookingSummary.total_amount,
     };
 
     console.log(bookingDetails);
 
-    this.subscriptions.add(this.bookings.bookRoom(bookingDetails).subscribe({
-      next: (response) => {
-        this.bookingData = response;
-        this.router.navigate(['/bookings']);
-      },
-      error: (error) => {
-        console.error('Error booking room:', error);
-        alert('Error booking room. Please try again later.');
-      },
-    }));
+    this.subscriptions.add(
+      this.bookings.bookRoom(bookingDetails).subscribe({
+        next: (response) => {
+          this.bookingData = response;
+          this.router.navigate(['/bookings']);
+        },
+        error: (error) => {
+          console.error('Error booking room:', error);
+          alert('Error booking room. Please try again later.');
+        },
+      })
+    );
   }
 
   submitFeedback(): void {
@@ -122,28 +125,31 @@ export class HotelDetailsComponent implements OnInit {
       comment: this.comment,
     };
 
-    this.subscriptions.add(this.bookings.postFeedback(payload).subscribe({
-      next: (response) => {
-        this.comment = '';
-        this.getFeedback(id!);
-      },
-      error: () => {
-        console.log('Error submitting feedback.');
-      },
-    }));
+    this.subscriptions.add(
+      this.bookings.postFeedback(payload).subscribe({
+        next: (response) => {
+          this.comment = '';
+          this.getFeedback(id!);
+        },
+        error: () => {
+          console.log('Error submitting feedback.');
+        },
+      })
+    );
   }
 
   getFeedback(hotelId: string): void {
-    this.subscriptions.add(this.bookings.getFeedback(hotelId).subscribe((data) => {
-      this.feedbackData = data;
-    }));
+    this.subscriptions.add(
+      this.bookings.getFeedback(hotelId).subscribe((data) => {
+        this.feedbackData = data;
+      })
+    );
   }
 
   updateBookingCalculation(): void {
     if (
-      !this.hotel._id || 
-      !this.hotel ||
-      !this.hotel.roomType ||
+      !this.hotel?.id ||
+      !this.hotel?.room_type ||
       !this.check_in ||
       !this.check_out ||
       this.guest_count < 1
@@ -153,26 +159,33 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     this.bookingData = {
-      room_id: this.hotel._id,
-      roomType: this.hotel.roomType,
+      room_id: this.hotel.id,
+      roomType: this.hotel.room_type, // use correct property
       guest_count: this.guest_count,
       check_in: this.check_in,
       check_out: this.check_out,
     };
 
-    this.subscriptions.add(this.bookings.calculateBooking(this.bookingData).subscribe({
-      next: (response) => {
-        this.bookingSummary = response;
-      },
-      error: (error) => {
-        console.error('Error calculating error: ', error);
-        this.bookingSummary = null;
-      },
-    }));
+    console.log('Booking request payload:', this.bookingData);
+
+    this.subscriptions.add(
+      this.bookings.calculateBooking(this.bookingData).subscribe({
+        next: (response) => {
+          this.bookingSummary = response.data;
+          console.log('Booking Summary: ', this.bookingSummary);
+        },
+        error: (error) => {
+          console.error('Error calculating error: ', error);
+          this.bookingSummary = null;
+        },
+      })
+    );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    console.log('HotelDetailsComponent destroyed and subscriptions cleaned up.');
+    console.log(
+      'HotelDetailsComponent destroyed and subscriptions cleaned up.'
+    );
   }
 }

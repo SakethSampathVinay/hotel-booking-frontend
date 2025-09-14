@@ -9,7 +9,7 @@ declare var Razorpay: any;
   providedIn: 'root',
 })
 export class BookingsService {
-  private apiUrl = environment.backendUrl
+  private apiUrl = environment.backendUrl;
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -25,7 +25,8 @@ export class BookingsService {
   }
 
   getBooking(): Observable<any> {
-    const url = `${this.apiUrl}/get-bookings`;
+    const user_id = localStorage.getItem('user');
+    const url = `${this.apiUrl}/get-bookings?user_id=${user_id}`;
     return this.http.get(url, { headers: this.getAuthHeaders() });
   }
 
@@ -49,38 +50,60 @@ export class BookingsService {
     amount: number,
     name: string,
     roomId: string,
-    bookingId: string
+    bookingId: string,
+    userId: number
   ): void {
     const url = `${this.apiUrl}/api/create-order`;
     const headers = this.getAuthHeaders();
-
     this.http
-      .post<any>(url, { amount, room_id: roomId }, { headers })
-      .subscribe((order) => {
-        const options = {
-          key: 'rzp_test_L0PKrkZl2dGUmB',
-          amount: order.amount,
-          currency: 'INR',
-          name: name,
-          order_id: order.id,
-          handler: (response: any) => {
-            this.confirmBooking(response, amount, roomId, bookingId);
-          },
-          prefill: {
-            name: 'Test User',
-            email: 'test@example.com',
-          },
-          notes: {
-            bookingId,
-            roomId,
-          },
-          theme: {
-            color: '#3399cc',
-          },
-        };
-        const rzp = new Razorpay(options);
-        rzp.open();
+      .post<any>(
+        url,
+        { amount, room_id: roomId, booking_id: bookingId, user_id: userId },
+        { headers }
+      )
+      .subscribe({
+        next: (order) => {
+          this.openRazorpay(order, name, amount, roomId, bookingId);
+        },
+        error: (err) => {
+          console.error('Error creating Razorpay order:', err);
+          alert('❌ Failed to initiate payment');
+        },
       });
+
+    console.log(userId);
+  }
+
+  private openRazorpay(
+    order: any,
+    name: string,
+    amount: number,
+    roomId: string,
+    bookingId: string
+  ) {
+    const options = {
+      key: 'rzp_test_L0PKrkZl2dGUmB', // replace with your Razorpay key
+      amount: order.amount,
+      currency: 'INR',
+      name: name,
+      order_id: order.id,
+      handler: (response: any) => {
+        this.confirmBooking(response, amount, roomId, bookingId);
+      },
+      prefill: {
+        name: name,
+        email: 'test@example.com',
+      },
+      notes: {
+        bookingId,
+        roomId,
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
   }
 
   confirmBooking(
@@ -103,12 +126,12 @@ export class BookingsService {
         headers: this.getAuthHeaders(),
       })
       .subscribe({
-        next: (res) => {
+        next: () => {
           alert('🎉 Booking confirmed!');
         },
         error: (err) => {
-          alert('❌ Booking failed');
           console.error('❌ Error confirming booking:', err);
+          alert('❌ Booking confirmation failed');
         },
       });
   }

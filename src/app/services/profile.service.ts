@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ProfileService {
-  private apiUrl = environment.backendUrl
+  private apiUrl = environment.backendUrl;
 
   constructor(private http: HttpClient) {}
 
