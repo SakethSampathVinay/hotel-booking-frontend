@@ -6,7 +6,7 @@
   </p>
 
   <div class="featured-total-container">
-    <div class="featured-card-container" *ngFor="let room of rooms.slice(0, 3)" [routerLink]="['/rooms', room._id]">
+    <div class="featured-card-container" *ngFor="let room of rooms.slice(0, 3)" [routerLink]="['/rooms', room.id]">
       <img [src]="room.images[0]" alt="Room Image" class="featured-image" />
       <div class="featured-card-content">
         <h3 class="featured-heading1">{{ room.hotel_name }}</h3>
