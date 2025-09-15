@@ -26,7 +26,7 @@ export class ProfileComponent {
     this.profileServiceSubscription = this.profileService
       .getProfile()
       .subscribe((data) => {
-        this.profileData = data.profileData;
+        this.profileData = data.profile;
       });
   }
 
@@ -53,6 +53,8 @@ export class ProfileComponent {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigate(['/signup']);
   }
 
   ngOnDestroy() {
