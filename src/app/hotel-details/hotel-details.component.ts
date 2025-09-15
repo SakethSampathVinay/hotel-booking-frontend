@@ -6,6 +6,7 @@ import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
 import { roomCommonData } from '../../assets/assets';
 import { Subscription } from 'rxjs';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-hotel-details',
@@ -120,7 +121,7 @@ export class HotelDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     const payload = {
-      hotel_id: id,
+      room_id: id,
       rating: this.rating,
       comment: this.comment,
     };
@@ -128,20 +129,21 @@ export class HotelDetailsComponent implements OnInit {
     this.subscriptions.add(
       this.bookings.postFeedback(payload).subscribe({
         next: (response) => {
+          console.log(response);
           this.comment = '';
           this.getFeedback(id!);
         },
-        error: () => {
-          console.log('Error submitting feedback.');
+        error: (error) => {
+          console.log(error);
         },
       })
     );
   }
 
-  getFeedback(hotelId: string): void {
+  getFeedback(room_id: string): void {
     this.subscriptions.add(
-      this.bookings.getFeedback(hotelId).subscribe((data) => {
-        this.feedbackData = data;
+      this.bookings.getFeedback(room_id).subscribe((data) => {
+        this.feedbackData = data.feedbacks;
       })
     );
   }
