@@ -17,7 +17,12 @@ export class FiltersComponent {
   @Output() filteredRoomsChange = new EventEmitter<any[]>();
 
   popularFilters = ['Single Bed', 'Double Bed', 'Suite'];
-  priceRange = ['₹1000 to 2000', '₹2000 to 5000', '₹5000 to 10000', '₹10000 to 20000'];
+  priceRange = [
+    '₹1000 to 2000',
+    '₹2000 to 5000',
+    '₹5000 to 10000',
+    '₹10000 to 20000',
+  ];
   sortBy = ['Price Low to High', 'Price High to Low', 'Newest First'];
 
   selectedRoomTypes: string[] = [];
@@ -32,7 +37,7 @@ export class FiltersComponent {
   ngOnInit() {
     this.RoomServiceSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
-        this.rooms = response;
+        this.rooms = response.hotels;
         this.emitFilteredRooms();
       },
       error: (error) => {
@@ -74,19 +79,20 @@ export class FiltersComponent {
   getFilteredRooms() {
     return this.rooms
       .filter((room) => {
+        console.log(room);
         const matchRoomType =
           this.selectedRoomTypes.length === 0 ||
-          this.selectedRoomTypes.includes(room.roomType);
+          this.selectedRoomTypes.includes(room.room_type);
         const matchesPrice =
           this.selectedPriceRanges.length === 0 ||
-          this.isPriceInSelectedRange(room.pricePerNight);
+          this.isPriceInSelectedRange(Number(room.price_per_night));
         return matchRoomType && matchesPrice;
       })
       .sort((a, b) => {
         if (this.selectedSortBy === 'Price Low to High')
-          return a.pricePerNight - b.pricePerNight;
+          return Number(a.price_per_night) - Number(b.price_per_night);
         if (this.selectedSortBy === 'Price High to Low')
-          return b.pricePerNight - a.pricePerNight;
+          return Number(b.price_per_night) - Number(a.price_per_night);
         if (this.selectedSortBy === 'Newest First')
           return (
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -108,7 +114,7 @@ export class FiltersComponent {
   }
 
   ngOnDestroy() {
-    if(this.RoomServiceSubscription) {
+    if (this.RoomServiceSubscription) {
       this.RoomServiceSubscription.unsubscribe();
     }
   }
