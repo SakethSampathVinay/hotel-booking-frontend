@@ -1,3 +1,9 @@
+<div class="search-feature">
+  <label for="" class="search-label">Search Hotels</label>
+  <input type="text" class="search-input" placeholder="Search for Hotels" [(ngModel)]="searchTerm"
+    (input)="SearchChange()">
+</div>
+
 <div class="filters-wrapper">
   <button class="filters-toggle-btn" (click)="showMobileFilters = true">
     Filters

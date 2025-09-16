@@ -22,7 +22,6 @@ export class HotelBookingsComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingSubscription = this.bookingService.getBooking().subscribe({
       next: (response) => {
-        console.log(response.bookings);
         return (this.bookingsData = response.bookings);
       },
       error: (error) => {

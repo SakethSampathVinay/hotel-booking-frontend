@@ -1,5 +1,5 @@
 <div class="hotel-rooms-total-container">
-  <app-filters (filteredRoomsChange)="updateRooms($event)"></app-filters>
+  <app-filters (filteredRoomsChange)="updateRooms($event)" (onSearchChange)="onSearch($event)"></app-filters>
   <div class="hotel-rooms-container">
     <h1 class="hotel-heading">Hotel Rooms</h1>
     <p class="hotel-description">

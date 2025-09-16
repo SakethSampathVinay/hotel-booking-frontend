@@ -104,11 +104,40 @@
     height: fit-content;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    margin-top: 150px;
+    margin-top: 1.5rem;
   }
 
   .filters-sidebar.mobile,
   .filters-backdrop {
     display: none;
   }
+}
+
+.search-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto 1rem auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.search-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.search-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }

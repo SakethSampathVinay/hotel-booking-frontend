@@ -15,6 +15,7 @@ export class FiltersComponent {
   showMobileFilters = false;
 
   @Output() filteredRoomsChange = new EventEmitter<any[]>();
+  @Output() onSearchChange = new EventEmitter<string>();
 
   popularFilters = ['Single Bed', 'Double Bed', 'Suite'];
   priceRange = [
@@ -28,6 +29,7 @@ export class FiltersComponent {
   selectedRoomTypes: string[] = [];
   selectedPriceRanges: string[] = [];
   selectedSortBy: string = '';
+  searchTerm: string = '';
 
   rooms: any[] = [];
 
@@ -76,10 +78,13 @@ export class FiltersComponent {
     this.filteredRoomsChange.emit(filtered);
   }
 
+  SearchChange() {
+    this.onSearchChange.emit(this.searchTerm);
+  }
+
   getFilteredRooms() {
     return this.rooms
       .filter((room) => {
-        console.log(room);
         const matchRoomType =
           this.selectedRoomTypes.length === 0 ||
           this.selectedRoomTypes.includes(room.room_type);
