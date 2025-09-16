@@ -1,16 +1,46 @@
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f4ff;
+}
+
+.bg-container {
+  flex: 1;
+  background-image: url("https://res.cloudinary.com/dgtfgihga/image/upload/v1757999771/photo-1549294413-26f195200c16_wrpeyi.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.bg-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
 .login-container {
+  flex: 1;
   max-width: 400px;
-  margin: 100px auto;
+  margin: auto;
   padding: 2.5rem 2rem;
-  background-color: #ffffff;
+  background-color: #f0f4ff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", sans-serif;
   color: #1f2937;
+  position: relative;
+  z-index: 1;
 }
 
 .login-title {
-  font-size: 1.75rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -33,6 +63,30 @@
 
 .login-input:focus {
   border-color: #6366f1;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 92%;
+  padding-right: 15px;
+}
+
+.password-wrapper i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.password-wrapper i:hover {
+  color: #4f46e5;
 }
 
 .login-button {
@@ -75,26 +129,97 @@
   color: red;
 }
 
-.password-wrapper {
+@keyframes slideIn {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bg-container {
+    display: none;
+  }
+
+  .login-container {
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 20px auto;
+    padding: 2.5rem 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", sans-serif;
+    color: #1f2937;
+  }
+
+  .login-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .login-button {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  .signup-link {
+    font-size: 0.8rem;
+  }
+}
+.bg-container .title,
+.bg-container .subtitle,
+.bg-container .description {
+  color: white;
+  font-family: "Roboto", sans-serif;
   position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: 0.5rem 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.password-wrapper input {
-  width: 92%;
-  padding-right: 15px;
+.bg-container .title {
+  font-size: 3rem;
+  font-weight: 700;
 }
 
-.password-wrapper i {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #6b7280;
+.bg-container .subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.bg-container .description {
   font-size: 1rem;
-  transition: color 0.3s;
-}
-
-.password-wrapper i:hover {
-  color: #4f46e5;
+  max-width: 300px;
+  line-height: 1.4;
 }

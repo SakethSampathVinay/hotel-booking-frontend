@@ -1,26 +1,37 @@
-<div class="login-container">
-  <h2 class="login-title">Login</h2>
-  <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
-    <input [(ngModel)]="email" name="email" #emailRef="ngModel" class="login-input" placeholder="Email" required />
-    <div class="error-msg" *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || loginForm.submitted)">
-      Email is required
-    </div>
-    <div class="password-wrapper">
-      <input [(ngModel)]="password" name="password" #passwordRef="ngModel" [type]="showPassword ? 'text' : 'password'"
-        class="login-input" placeholder="Password" minlength="6" required />
-      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
-    </div>
-    <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || loginForm.submitted)"
-      class="error-msg">
-      Password is required
-    </div>
-    <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">
-      Password must be at least 6 characters
-    </div>
-    <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
-    <p class="signup-link">
-      Don't have an account?
-      <a (click)="onSignupRedirect()" class="signup-anchor">Sign up here</a>
+<div class="main-container">
+  <div class="bg-container">
+    <h1 class="title">EasyStay</h1>
+    <h3 class="subtitle">Your Perfect Stay Awaits</h3>
+    <p class="description">
+      Book hotels effortlessly, enjoy exclusive deals, and make every stay memorable with EasyStay.
     </p>
-  </form>
+  </div>
+
+  <div class="login-container">
+    <h2 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Welcome Back to EasyStay</h2>
+    <h3 class="login-title">Login here</h3>
+    <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
+      <input [(ngModel)]="email" name="email" #emailRef="ngModel" class="login-input" placeholder="Email" required />
+      <div class="error-msg" *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || loginForm.submitted)">
+        Email is required
+      </div>
+      <div class="password-wrapper">
+        <input [(ngModel)]="password" name="password" #passwordRef="ngModel" [type]="showPassword ? 'text' : 'password'"
+          class="login-input" placeholder="Password" minlength="6" required />
+        <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
+      </div>
+      <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || loginForm.submitted)"
+        class="error-msg">
+        Password is required
+      </div>
+      <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">
+        Password must be at least 6 characters
+      </div>
+      <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+      <p class="signup-link">
+        Don't have an account?
+        <a (click)="onSignupRedirect()" class="signup-anchor">Sign up here</a>
+      </p>
+    </form>
+  </div>
 </div>

@@ -7,8 +7,8 @@
       your stay and create unforgettable memories.
     </p>
 
-    <h1 class="hotel-rooms-not-available" *ngIf="filteredRooms.length === 0">
-      No Rooms are Available
+    <h1 class="hotel-rooms-not-available" *ngIf="filteredRooms.length === 0 && !isLoading">
+      No Hotels are Available
     </h1>
 
     <div *ngIf="isLoading" class="loading-container">

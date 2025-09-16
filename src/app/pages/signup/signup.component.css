@@ -1,39 +1,100 @@
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f4ff;
+}
+
+.bg-container,
 .signup-container {
-  max-width: 420px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  text-align: center;
+  background-color: #f0f4ff;
+}
+
+.bg-container {
+  background-image: url("https://res.cloudinary.com/dgtfgihga/image/upload/v1758000427/images_skhvzl.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.bg-container .title,
+.bg-container .subtitle,
+.bg-container .description {
+  color: white;
+  position: relative;
+  z-index: 1;
+  margin: 0.5rem 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.bg-container .title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.bg-container .subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.bg-container .description {
+  font-size: 1rem;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+.signup-container {
+  max-width: auto;
   margin: 100px auto;
   padding: 2.5rem 2rem;
-  background-color: #ffffff;
+  background-color: #f0f4ff;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", sans-serif;
   color: #1f2937;
+  z-index: 1;
 }
 
 .signup-title {
   font-size: 1.75rem;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   margin-bottom: 1.75rem;
 }
 
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 10px;
+  width: 70%;
 }
 
 .form-group {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .form-label {
+  text-align: left;
   font-size: 0.95rem;
   color: #374151;
 }
 
 .form-input {
+  width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -81,11 +142,6 @@
   text-decoration: underline;
 }
 
-.error-msg {
-  font-weight: 500;
-  color: red;
-}
-
 .password-wrapper {
   position: relative;
 }
@@ -108,4 +164,33 @@
 
 .password-wrapper i:hover {
   color: #4f46e5;
+}
+
+.error-msg {
+  font-weight: 500;
+  color: red;
+}
+
+.password-form-group {
+  width: 110%;
+  text-align: left;
+}
+
+.password-icon {
+  padding-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .bg-container {
+    display: none;
+  }
+  .signup-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #ffffff;
+  }
 }

@@ -1,52 +1,61 @@
-<div class="signup-container">
-  <h2 class="signup-title">Sign Up</h2>
+<div class="main-container">
+  <div class="bg-container">
+    <h1 class="title">EasyStay</h1>
+    <h3 class="subtitle">Join EasyStay Today</h3>
+    <p class="description">
+      Create your account to book hotels effortlessly, enjoy exclusive deals, and make every stay memorable.
+    </p>
+  </div>
 
-  <form #signupForm="ngForm" (ngSubmit)="onSignup()" class="signup-form">
-    <div class="form-group">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" id="name" name="name" [(ngModel)]="name" #nameRef="ngModel" required
-        placeholder="Enter your name" class="form-input" />
-      <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched || signupForm.submitted)" class="error-msg">Name
-        is required</div>
-    </div>
+  <div class="signup-container">
+    <h2 style="text-align: center; font-family: 'Times New Roman', Times, serif; margin-bottom: -10px;">Welcome to
+      EasyStay</h2>
+    <h3 class="login-title">Sign up here</h3>
 
-    <div class="form-group">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" id="email" name="email" [(ngModel)]="email" #emailRef="ngModel" required
-        placeholder="Enter your email" class="form-input" />
-      <div *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || signupForm.submitted)" class="error-msg">
-        Email is required
+    <form #signupForm="ngForm" (ngSubmit)="onSignup()" class="signup-form">
+      <div class="form-group">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="name" #nameRef="ngModel" placeholder="Enter your name"
+          class="form-input" required />
+        <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched || signupForm.submitted)" class="error-msg">
+          Name is required</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="phone" class="form-label">Phone Number</label>
-      <input type="text" id="phone" name="phone" [(ngModel)]="phone" #phoneRef="ngModel" required
-        placeholder="Enter your Phone Number" class="form-input" pattern="^[0-9]{10}$" />
-      <div *ngIf="phoneRef.invalid && (phoneRef.dirty || phoneRef.touched || signupForm.submitted)" class="error-msg">
-        Phone is required
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" #emailRef="ngModel"
+          placeholder="Enter your email" class="form-input" required />
+        <div *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || signupForm.submitted)" class="error-msg">
+          Email is required</div>
       </div>
-      <div *ngIf="phoneRef.errors?.['pattern']" class="error-msg">Phone must be 10 digits</div>
-    </div>
 
-    <div class="form-group">
-      <label for="password" class="form-label">Password</label>
-      <div class="password-wrapper">
-        <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password"
-          #passwordRef="ngModel" required placeholder="Enter your password" class="form-input" minlength="6" />
-        <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="text" id="phone" name="phone" [(ngModel)]="phone" #phoneRef="ngModel"
+          placeholder="Enter your phone number" class="form-input" required pattern="^[0-9]{10}$" />
+        <div *ngIf="phoneRef.invalid && (phoneRef.dirty || phoneRef.touched || signupForm.submitted)" class="error-msg">
+          Phone is required</div>
+        <div *ngIf="phoneRef.errors?.['pattern']" class="error-msg">Phone must be 10 digits</div>
       </div>
-      <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || signupForm.submitted)"
-        class="error-msg">Password is
-        required</div>
-      <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">Password must be at least 6 characters</div>
-    </div>
 
-    <button type="submit" class="signup-button" [disabled]="signupForm.invalid">Sign Up</button>
-  </form>
+      <div class="password-form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password"
+            #passwordRef="ngModel" placeholder="Enter your password" class="form-input" minlength="6" required />
+          <i class="fa password-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
+        </div>
+        <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || signupForm.submitted)"
+          class="error-msg">Password is required</div>
+        <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">Password must be at least 6 characters</div>
+      </div>
 
-  <p class="login-redirect">
-    Already have an account?
-    <a (click)="onLoginRedirect()" class="login-anchor">Login here</a>
-  </p>
+      <button type="submit" class="signup-button" [disabled]="signupForm.invalid">Sign Up</button>
+    </form>
+
+    <p class="login-redirect">
+      Already have an account?
+      <a (click)="onLoginRedirect()" class="login-anchor">Login here</a>
+    </p>
+  </div>
 </div>
