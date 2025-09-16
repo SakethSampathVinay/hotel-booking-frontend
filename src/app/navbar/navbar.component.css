@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .navbar-container {
@@ -16,15 +16,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
   z-index: 999;
+  transition: all 0.3s ease;
 }
 
 .navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: #1f2937;
   text-decoration: none;
   cursor: pointer;
@@ -40,10 +41,10 @@ body {
   color: #1f2937;
   cursor: pointer;
   position: relative;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 .navbar-li:hover {
-  color: #000;
+  color: #0f172a;
 }
 .navbar-li::after {
   content: "";
@@ -58,31 +59,114 @@ body {
 }
 
 .navbar-button {
-  padding: 8px 20px;
+  padding: 10px 24px;
   border-radius: 9999px;
   border: 1px solid #1f2937;
-  background-color: transparent;
+  background: linear-gradient(145deg, #f9fafb, #e5e7eb);
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 500;
   color: #1f2937;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 .navbar-button:hover {
-  background-color: #f3f4f6;
+  background: linear-gradient(145deg, #e5e7eb, #d1d5db);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-toggle {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  gap: 4px;
+  gap: 5px;
 }
 .navbar-toggle span {
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 26px;
+  height: 3px;
   background-color: #1f2937;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 75%;
+  max-width: 320px;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  gap: 30px;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 998;
+  transition: left 0.3s ease-in-out;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.mobile-menu a,
+.mobile-menu button {
+  font-size: 1.2rem;
+  color: #1f2937;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.mobile-menu a:hover,
+.mobile-menu button:hover {
+  color: #0f172a;
+  transform: translateX(5px);
+}
+
+.mobile-menu.show {
+  left: 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.close-button:hover {
+  transform: rotate(90deg);
+  color: #f87171;
+}
+
+.mobile-menu .navbar-button {
+  margin-top: 20px;
+  width: 80%;
+  text-align: center;
+  background: black;
+  color: white;
+  border: none;
+}
+.mobile-menu .navbar-button:hover {
+  background: #ef4444;
+  transform: translateY(-2px);
+}
+
+.admin-panel {
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+}
+.admin-panel:hover {
+  color: #0f172a;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -92,46 +176,7 @@ body {
   .navbar-toggle {
     display: flex;
   }
-}
-
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100vh;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  z-index: 998;
-  transition: left 0.3s ease-in-out;
-}
-.mobile-menu a,
-.mobile-menu button {
-  font-size: 1.2rem;
-  color: #1f2937;
-  text-decoration: none;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.mobile-menu.show {
-  left: 0;
-}
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.admin-panel {
-  color: black;
-  text-decoration: none;
+  .desktop-navbar {
+    display: none;
+  }
 }
