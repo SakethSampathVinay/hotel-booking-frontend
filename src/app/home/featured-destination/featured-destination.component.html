@@ -5,7 +5,12 @@
     world, offering unparalleled luxury and unforgettable experiences.
   </p>
 
-  <div class="featured-total-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading hotels...</p>
+  </div>
+
+  <div class="featured-total-container" *ngIf="!isLoading">
     <div class="featured-card-container" *ngFor="let room of rooms.slice(0, 3)" [routerLink]="['/rooms', room.id]">
       <img [src]="room.images[0]" alt="Room Image" class="featured-image" />
       <div class="featured-card-content">

@@ -17,24 +17,28 @@ export class FeaturedDestinationComponent {
 
   private roomSubscription!: Subscription;
 
+  isLoading: boolean = false;
   rooms: any[] = [];
 
   ngOnInit() {
+    this.isLoading = true;
     this.roomSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
         this.rooms = response.hotels.map((room: any) => {
           return room;
         });
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error fetching rooms:', error);
         this.rooms = [];
+        this.isLoading = false;
       },
     });
   }
 
   ngOnDestroy() {
-    if(this.roomSubscription) {
+    if (this.roomSubscription) {
       this.roomSubscription.unsubscribe();
     }
   }

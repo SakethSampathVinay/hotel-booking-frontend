@@ -14,20 +14,24 @@ import { Subscription } from 'rxjs';
 export class HotelsComponent implements OnInit {
   allHotels: any[] = [];
   filteredRooms: any[] = [];
+  isLoading: boolean = false;
 
   constructor(private roomService: RoomService) {}
   private RoomServiceSubscription!: Subscription;
 
   ngOnInit(): void {
+    this.isLoading = true;
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.RoomServiceSubscription = this.roomService.getRooms().subscribe({
       next: (response) => {
         this.allHotels = response.hotels;
         this.filteredRooms = [...this.allHotels];
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error fetching rooms:', error);
         this.filteredRooms = [];
+        this.isLoading = false;
       },
     });
   }
