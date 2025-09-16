@@ -31,8 +31,11 @@
 
     <div class="form-group">
       <label for="password" class="form-label">Password</label>
-      <input type="password" id="password" name="password" [(ngModel)]="password" #passwordRef="ngModel" required
-        placeholder="Enter your password" class="form-input" minlength="6" />
+      <div class="password-wrapper">
+        <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password"
+          #passwordRef="ngModel" required placeholder="Enter your password" class="form-input" minlength="6" />
+        <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
+      </div>
       <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || signupForm.submitted)"
         class="error-msg">Password is
         required</div>

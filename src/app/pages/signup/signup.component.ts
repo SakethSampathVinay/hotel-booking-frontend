@@ -15,9 +15,18 @@ export class SignupComponent {
   email: string = '';
   phone: string = '';
   password: string = '';
+  showPassword: boolean = false;
   message: string = '';
 
   constructor(private signupSerive: LoginService, private router: Router) {}
+
+  onShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    } else {
+      this.showPassword = false;
+    }
+  }
 
   onSignup(): void {
     this.signupSerive

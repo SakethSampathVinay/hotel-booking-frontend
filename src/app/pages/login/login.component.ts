@@ -14,9 +14,18 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  showPassword: boolean = false;
   message: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
+
+  onShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    } else {
+      this.showPassword = false;
+    }
+  }
 
   onLogin(): void {
     this.loginService.login(this.email, this.password).subscribe({

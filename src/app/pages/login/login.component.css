@@ -74,3 +74,27 @@
   font-weight: 500;
   color: red;
 }
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 92%;
+  padding-right: 15px;
+}
+
+.password-wrapper i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.password-wrapper i:hover {
+  color: #4f46e5;
+}

@@ -2,14 +2,21 @@
   <h2 class="login-title">Login</h2>
   <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
     <input [(ngModel)]="email" name="email" #emailRef="ngModel" class="login-input" placeholder="Email" required />
-    <div class="error-msg" *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || loginForm.submitted)">Email
-      is required</div>
-    <input [(ngModel)]="password" name="password" #passwordRef="ngModel" type="password" class="login-input"
-      placeholder="Password" minlength="6" required />
+    <div class="error-msg" *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched || loginForm.submitted)">
+      Email is required
+    </div>
+    <div class="password-wrapper">
+      <input [(ngModel)]="password" name="password" #passwordRef="ngModel" [type]="showPassword ? 'text' : 'password'"
+        class="login-input" placeholder="Password" minlength="6" required />
+      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="onShowPassword()"></i>
+    </div>
     <div *ngIf="passwordRef.invalid && (passwordRef.dirty || passwordRef.touched || loginForm.submitted)"
-      class="error-msg">Password is
-      required</div>
-    <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">Password must be at least 6 characters</div>
+      class="error-msg">
+      Password is required
+    </div>
+    <div *ngIf="passwordRef.errors?.['minlength']" class="error-msg">
+      Password must be at least 6 characters
+    </div>
     <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
     <p class="signup-link">
       Don't have an account?
