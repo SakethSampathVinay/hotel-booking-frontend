@@ -70,8 +70,6 @@ export class BookingsService {
           alert('❌ Failed to initiate payment');
         },
       });
-
-    console.log(userId);
   }
 
   private openRazorpay(
@@ -128,6 +126,7 @@ export class BookingsService {
       .subscribe({
         next: () => {
           alert('🎉 Booking confirmed!');
+          window.location.reload();
         },
         error: (err) => {
           console.error('❌ Error confirming booking:', err);

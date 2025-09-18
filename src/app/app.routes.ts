@@ -16,7 +16,6 @@ export const routes: Routes = [
       import('./pages/signup/signup.component').then((c) => c.SignupComponent),
     canActivate: [loginSignupGuard],
   },
-  
   {
     path: '',
     loadComponent: () =>

@@ -6,7 +6,7 @@ import { RoomService } from '../services/room.service';
 import { BookingsService } from '../services/bookings.service';
 import { roomCommonData } from '../../assets/assets';
 import { Subscription } from 'rxjs';
-import { error } from 'node:console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hotel-details',
@@ -35,11 +35,14 @@ export class HotelDetailsComponent implements OnInit {
   minDate: string = '';
   minDateCheckOut: string = '';
 
+  errorMsg: string = '';
+
   constructor(
     private roomService: RoomService,
     private route: ActivatedRoute,
     private bookings: BookingsService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   private subscriptions: Subscription = new Subscription();
@@ -72,10 +75,13 @@ export class HotelDetailsComponent implements OnInit {
             console.warn('Hotel images not found or not an array.');
           }
           this.updateBookingCalculation();
+          this.toastr.success('Hotel Details Fetched Successfully', 'Success');
         },
         (error) => {
           console.error('Error fetching rooms:', error);
           this.data = [];
+          this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+          this.toastr.error(this.errorMsg);
         }
       )
     );
@@ -101,17 +107,18 @@ export class HotelDetailsComponent implements OnInit {
       totalAmount: this.bookingSummary.total_amount,
     };
 
-    console.log(bookingDetails);
-
     this.subscriptions.add(
       this.bookings.bookRoom(bookingDetails).subscribe({
         next: (response) => {
           this.bookingData = response;
           this.router.navigate(['/bookings']);
+          this.toastr.success('Hotel Booked Successfully', 'Success');
         },
         error: (error) => {
           console.error('Error booking room:', error);
           alert('Error booking room. Please try again later.');
+          this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+          this.toastr.error(this.errorMsg);
         },
       })
     );
@@ -129,12 +136,14 @@ export class HotelDetailsComponent implements OnInit {
     this.subscriptions.add(
       this.bookings.postFeedback(payload).subscribe({
         next: (response) => {
-          console.log(response);
           this.comment = '';
           this.getFeedback(id!);
+          this.toastr.success('Review Submitted Successfully', 'Success');
         },
         error: (error) => {
           console.log(error);
+          this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+          this.toastr.error(this.errorMsg);
         },
       })
     );
@@ -162,19 +171,16 @@ export class HotelDetailsComponent implements OnInit {
 
     this.bookingData = {
       room_id: this.hotel.id,
-      roomType: this.hotel.room_type, // use correct property
+      roomType: this.hotel.room_type,
       guest_count: this.guest_count,
       check_in: this.check_in,
       check_out: this.check_out,
     };
 
-    console.log('Booking request payload:', this.bookingData);
-
     this.subscriptions.add(
       this.bookings.calculateBooking(this.bookingData).subscribe({
         next: (response) => {
           this.bookingSummary = response.data;
-          console.log('Booking Summary: ', this.bookingSummary);
         },
         error: (error) => {
           console.error('Error calculating error: ', error);

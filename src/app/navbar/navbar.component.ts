@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   menuOpen: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastr: ToastrService) {}
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -24,5 +25,6 @@ export class NavbarComponent {
   logout(): void {
     this.router.navigate(['/signup']);
     localStorage.removeItem('token');
+    this.toastr.success('Logout Successfully', 'Success');
   }
 }

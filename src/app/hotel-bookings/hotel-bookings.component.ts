@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BookingsService } from '../services/bookings.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hotel-bookings',
@@ -14,18 +15,25 @@ export class HotelBookingsComponent {
   isPaid: boolean = false;
 
   bookingsData: any[] = [];
+  errorMsg: string = '';
 
-  constructor(private bookingService: BookingsService) {}
+  constructor(
+    private bookingService: BookingsService,
+    private toastr: ToastrService
+  ) {}
   private bookingSubscription!: Subscription;
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.bookingSubscription = this.bookingService.getBooking().subscribe({
       next: (response) => {
-        return (this.bookingsData = response.bookings);
+        this.bookingsData = response.bookings;
+        this.toastr.success('Fetched Bookings', 'Success');
       },
       error: (error) => {
         console.error('Error fetching bookigns: ', error);
+        this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+        this.toastr.error(this.errorMsg);
         return (this.bookingsData = []);
       },
     });
@@ -33,13 +41,20 @@ export class HotelBookingsComponent {
 
   isPaidfn(booking: any) {
     this.bookingSubscription = this.bookingService
-      .updateBookingPaid(booking._id)
+      .updateBookingPaid(booking.id)
       .subscribe({
         next: (res) => {
+          console.log(res);
           booking.status = 'Paid';
+          this.toastr.success('Payment done Successfully', 'Success');
+          setTimeout(() => {
+            this.reloadBookings();
+          }, 500);
         },
         error: (err) => {
           console.error('Payment update failed:', err);
+          this.errorMsg = `Error: ${err.status} ${err.error.message}`;
+          this.toastr.error(this.errorMsg);
         },
       });
   }
@@ -59,7 +74,21 @@ export class HotelBookingsComponent {
       .cancelBooking(id)
       .subscribe((data: any) => {
         console.log('Successfully Cancelled the Booking');
+        this.toastr.success('Successfully Cancelled the Booking', 'Success');
+        this.reloadBookings();
       });
+  }
+
+  reloadBookings() {
+    this.bookingService.getBooking().subscribe({
+      next: (response) => {
+        this.bookingsData = response.bookings;
+      },
+      error: (error) => {
+        this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+        this.toastr.error(this.errorMsg);
+      },
+    });
   }
 
   ngOnDestroy(): void {

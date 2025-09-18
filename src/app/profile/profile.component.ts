@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +15,13 @@ import { Subscription } from 'rxjs';
 export class ProfileComponent {
   profileData: any = {};
   isEditMode: boolean = false;
+  errorMsg: string = '';
 
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   private profileServiceSubscription!: Subscription;
 
   ngOnInit() {
@@ -39,15 +45,24 @@ export class ProfileComponent {
       .updateProfile(this.profileData)
       .subscribe(() => {
         this.isEditMode = false;
+        this.toastr.success('Profile Updated Successfully', 'Success');
       });
   }
 
   deleteProfile() {
     this.profileServiceSubscription = this.profileService
       .deleteProfile()
-      .subscribe(() => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/signup']);
+      .subscribe({
+        next: () => {
+          localStorage.removeItem('token');
+          this.router.navigate(['/signup']);
+          this.toastr.warning('Account Deleted!!!');
+        },
+        error: (error) => {
+          console.log(error);
+          this.errorMsg = `Error: ${error.status} ${error.error.message}`;
+          this.toastr.error(this.errorMsg);
+        },
       });
   }
 
@@ -55,6 +70,7 @@ export class ProfileComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/signup']);
+    this.toastr.success('Logged Out!!!', 'Success');
   }
 
   ngOnDestroy() {
